@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bukti Nilai Mahasiswa - JasaTugasUT</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+        }
+        #imageModal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            padding-top: 50px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.95);
+        }
+        #modalImg {
+            margin: auto;
+            display: block;
+            max-width: 90%;
+            max-height: 85%;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(255,255,255,0.2);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
+
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-2xl font-bold text-blue-900">JasaTugas<span class="text-blue-500">UT</span></div>
+            <a href="index.html" class="text-blue-600 font-bold hover:text-blue-800 transition flex items-center">
+                <i class="fas fa-arrow-left mr-2"></i> Kembali ke Beranda
+            </a>
+        </div>
+    </nav>
+
+    <header class="gradient-bg text-white py-16">
+        <div class="container mx-auto px-6 text-center">
+            <div class="inline-block bg-yellow-400 text-blue-900 px-4 py-1 rounded-full text-sm font-bold mb-4 uppercase tracking-widest">
+                Update: Tahun Akademik 2025.2
+            </div>
+            <h1 class="text-3xl md:text-5xl font-extrabold mb-4">Bukti Nyata Nilai Mahasiswa</h1>
+            <p class="text-lg opacity-90 max-w-2xl mx-auto">
+                Kami berkomitmen memberikan hasil terbaik dan transparan. Berikut adalah kumpulan bukti nilai nyata (Tuton, UAS, Artikel Ilmiah, hingga Skripsi) dari klien kami.
+            </p>
+            <p class="mt-4 text-sm italic text-blue-100">*Nilai akan diperbaharui setiap semester (tiap Tahun Akademik).</p>
+        </div>
+    </header>
+
+    <section class="py-16">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8">
+                
+                <div class="group cursor-pointer bg-white p-4 rounded-2xl shadow-md hover:shadow-2xl transition border-b-4 border-blue-500" onclick="openModal(this)">
+                    <img src="nilai0.png" alt="Nilai Akhir Tuton" class="rounded-xl w-full h-72 object-cover object-top">
+                    <div class="mt-4 text-center"><h4 class="font-bold text-blue-900">Nilai Akhir Tuton</h4><p class="text-xs text-gray-500">Tahun Akademik 2025.2</p></div>
+                </div>
+                <div class="group cursor-pointer bg-white p-4 rounded-2xl shadow-md hover:shadow-2xl transition border-b-4 border-blue-500" onclick="openModal(this)">
+                    <img src="nilai1.png" alt="Nilai Akhir Tuton" class="rounded-xl w-full h-72 object-cover object-top">
+                    <div class="mt-4 text-center"><h4 class="font-bold text-blue-900">Nilai Akhir Tuton</h4><p class="text-xs text-gray-500">Tahun Akademik 2025.2</p></div>
+                </div>
+                <div class="group cursor-pointer bg-white p-4 rounded-2xl shadow-md hover:shadow-2xl transition border-b-4 border-blue-500" onclick="openModal(this)">
+                    <img src="nilai2.png" alt="Nilai Akhir Tuton" class="rounded-xl w-full h-72 object-cover object-top">
+                    <div class="mt-4 text-center"><h4 class="font-bold text-blue-900">Nilai Akhir Tuton</h4><p class="text-xs text-gray-500">Tahun Akademik 2025.2</p></div>
+                </div>
+                <div class="group cursor-pointer bg-white p-4 rounded-2xl shadow-md hover:shadow-2xl transition border-b-4 border-blue-500" onclick="openModal(this)">
+                    <img src="nilai3.png" alt="Nilai Akhir Tuton" class="rounded-xl w-full h-72 object-cover object-top">
+                    <div class="mt-4 text-center"><h4 class="font-bold text-blue-900">Nilai Akhir Tuton</h4><p class="text-xs text-gray-500">Tahun Akademik 2025.2</p></div>
+                </div>
+
+                <div class="group cursor-pointer bg-white p-4 rounded-2xl shadow-md hover:shadow-2xl transition border-b-4 border-green-500" onclick="openModal(this)">
+                    <img src="nilai4.png" alt="Nilai Akhir Artikel Ilmiah" class="rounded-xl w-full h-72 object-cover object-top">
+                    <div class="mt-4 text-center"><h4 class="font-bold text-blue-900">Nilai Akhir Artikel Ilmiah</h4><p class="text-xs text-gray-500">Tahun Akademik 2025.2</p></div>
+                </div>
+                <div class="group cursor-pointer bg-white p-4 rounded-2xl shadow-md hover:shadow-2xl transition border-b-4 border-green-500" onclick="openModal(this)">
+                    <img src="nilai5.png" alt="Nilai Akhir Artikel Ilmiah" class="rounded-xl w-full h-72 object-cover object-top">
+                    <div class="mt-4 text-center"><h4 class="font-bold text-blue-900">Nilai Akhir Artikel Ilmiah</h4><p class="text-xs text-gray-500">Tahun Akademik 2025.2</p></div>
+                </div>
+
+                <div class="group cursor-pointer bg-white p-4 rounded-2xl shadow-md hover:shadow-2xl transition border-b-4 border-red-500" onclick="openModal(this)">
+                    <img src="nilai6.png" alt="Nilai Akhir Skripsi" class="rounded-xl w-full h-72 object-cover object-top">
+                    <div class="mt-4 text-center"><h4 class="font-bold text-blue-900">Nilai Akhir Skripsi</h4><p class="text-xs text-gray-500">Tahun Akademik 2025.2</p></div>
+                </div>
+                <div class="group cursor-pointer bg-white p-4 rounded-2xl shadow-md hover:shadow-2xl transition border-b-4 border-red-500" onclick="openModal(this)">
+                    <img src="nilai7.png" alt="Nilai Akhir Skripsi" class="rounded-xl w-full h-72 object-cover object-top">
+                    <div class="mt-4 text-center"><h4 class="font-bold text-blue-900">Nilai Akhir Skripsi</h4><p class="text-xs text-gray-500">Tahun Akademik 2025.2</p></div>
+                </div>
+                <div class="group cursor-pointer bg-white p-4 rounded-2xl shadow-md hover:shadow-2xl transition border-b-4 border-red-500" onclick="openModal(this)">
+                    <img src="nilai8.png" alt="Nilai Akhir Skripsi" class="rounded-xl w-full h-72 object-cover object-top">
+                    <div class="mt-4 text-center"><h4 class="font-bold text-blue-900">Nilai Akhir Skripsi</h4><p class="text-xs text-gray-500">Tahun Akademik 2025.2</p></div>
+                </div>
+                <div class="group cursor-pointer bg-white p-4 rounded-2xl shadow-md hover:shadow-2xl transition border-b-4 border-red-500" onclick="openModal(this)">
+                    <img src="nilai9.png" alt="Nilai Akhir Skripsi" class="rounded-xl w-full h-72 object-cover object-top">
+                    <div class="mt-4 text-center"><h4 class="font-bold text-blue-900">Nilai Akhir Skripsi</h4><p class="text-xs text-gray-500">Tahun Akademik 2025.2</p></div>
+                </div>
+
+                <div class="group cursor-pointer bg-white p-4 rounded-2xl shadow-md hover:shadow-2xl transition border-b-4 border-yellow-500" onclick="openModal(this)">
+                    <img src="nilai10.png" alt="Nilai Akhir Proyek" class="rounded-xl w-full h-72 object-cover object-top">
+                    <div class="mt-4 text-center"><h4 class="font-bold text-blue-900">Nilai Akhir Proyek</h4><p class="text-xs text-gray-500">Tahun Akademik 2025.2</p></div>
+                </div>
+                <div class="group cursor-pointer bg-white p-4 rounded-2xl shadow-md hover:shadow-2xl transition border-b-4 border-yellow-500" onclick="openModal(this)">
+                    <img src="nilai11.png" alt="Nilai Akhir Proyek" class="rounded-xl w-full h-72 object-cover object-top">
+                    <div class="mt-4 text-center"><h4 class="font-bold text-blue-900">Nilai Akhir Proyek</h4><p class="text-xs text-gray-500">Tahun Akademik 2025.2</p></div>
+                </div>
+
+                <div class="group cursor-pointer bg-white p-4 rounded-2xl shadow-md hover:shadow-2xl transition border-b-4 border-purple-500" onclick="openModal(this)">
+                    <img src="nilai12.png" alt="Nilai Akhir PKM" class="rounded-xl w-full h-72 object-cover object-top">
+                    <div class="mt-4 text-center"><h4 class="font-bold text-blue-900">Nilai Akhir PKM</h4><p class="text-xs text-gray-500">Tahun Akademik 2025.2</p></div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-blue-950 text-white py-12 text-center">
+        <div class="container mx-auto px-6">
+            <p class="mb-4">Ingin meraih nilai maksimal seperti mereka?</p>
+            <a href="https://wa.me/6282210168166" class="bg-green-500 text-white px-8 py-3 rounded-full font-bold hover:bg-green-600 transition shadow-lg inline-block">
+                <i class="fab fa-whatsapp mr-2"></i>Konsultasi Sekarang
+            </a>
+            <p class="mt-10 opacity-50 text-xs">© 2026 JasaTugasUT. Seluruh identitas klien dirahasiakan demi privasi.</p>
+        </div>
+    </footer>
+
+    <div id="imageModal" onclick="this.style.display='none'">
+        <span class="absolute top-5 right-10 text-white text-5xl font-bold cursor-pointer transition hover:text-yellow-400">&times;</span>
+        <img id="modalImg">
+    </div>
+
+    <script>
+        function openModal(element) {
+            const modal = document.getElementById("imageModal");
+            const modalImg = document.getElementById("modalImg");
+            const img = element.getElementsByTagName('img')[0];
+            modal.style.display = "block";
+            modalImg.src = img.src;
+        }
+    </script>
+
+</body>
+</html>
