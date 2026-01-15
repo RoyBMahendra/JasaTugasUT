@@ -6,144 +6,248 @@
     <title>Bukti Nilai Mahasiswa - JasaTugasUT</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <style>
-        .gradient-bg {
-            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+        .gradient-bg { background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%); }
+        html, body { height: 100%; margin: 0; }
+        body { 
+            display: flex; flex-direction: column; min-height: 100vh;
+            background-image: url('image.jpg'); background-attachment: fixed;
+            background-size: cover; background-position: center; background-repeat: no-repeat;
         }
-        #imageModal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            padding-top: 50px;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.95);
+        body::before {
+            content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(249, 250, 251, 0.92); z-index: -1;
         }
-        #modalImg {
-            margin: auto;
-            display: block;
-            max-width: 90%;
-            max-height: 85%;
-            border-radius: 8px;
-            box-shadow: 0 0 20px rgba(255,255,255,0.2);
-        }
+        main { flex: 1 0 auto; }
+        footer { flex-shrink: 0; }
+        #fullGalleryModal { display: none; position: fixed; inset: 0; z-index: 9999; background: #1a1a1a; overflow-y: auto; }
+        .swiper-main { width: 100%; height: 60vh; background: #000; transition: all 0.3s ease; }
+        .swiper-main .swiper-slide { display: flex; justify-content: center; align-items: center; }
+        .swiper-main .swiper-slide img { max-width: 95%; max-height: 95%; object-fit: contain; cursor: zoom-in; transition: all 0.3s ease; }
+        #fullGalleryModal.is-zoomed .swiper-main { height: 100vh; }
+        .thumbnail-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; padding: 15px; background: #2a2a2a; }
+        @media (min-width: 768px) { .thumbnail-grid { grid-template-columns: repeat(8, 1fr); gap: 12px; padding: 20px 60px; } }
+        .thumb-item { aspect-ratio: 1 / 1; cursor: pointer; border-radius: 4px; overflow: hidden; opacity: 0.5; transition: 0.3s; border: 2px solid transparent; }
+        .thumb-item.active { opacity: 1; border-color: #3b82f6; }
+        .thumb-item img { width: 100%; height: 100%; object-fit: cover; }
+        .modal-header { position: sticky; top: 0; background: white; z-index: 10; display: flex; justify-content: space-between; align-items: center; padding: 10px 20px; }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800 font-sans">
+<body>
 
     <nav class="bg-white shadow-md sticky top-0 z-50">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
             <div class="text-2xl font-bold text-blue-900">JasaTugas<span class="text-blue-500">UT</span></div>
-            <a href="index.html" class="text-blue-600 font-bold hover:text-blue-800 transition flex items-center">
-                <i class="fas fa-arrow-left mr-2"></i> Kembali ke Beranda
-            </a>
+            <div class="flex items-center">
+                <div class="relative inline-block text-left mr-6 group">
+                    <button class="flex items-center text-blue-900 font-bold hover:text-blue-600 transition">
+                        <i class="fas fa-globe mr-2"></i><span id="currentLang">ID</span><i class="fas fa-chevron-down ml-1 text-xs"></i>
+                    </button>
+                    <div class="absolute right-0 mt-2 w-32 bg-white border border-gray-100 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-[100]">
+                        <div class="py-1">
+                            <a href="#" onclick="changeLang('ID')" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 font-semibold">INDONESIA</a>
+                            <a href="#" onclick="changeLang('EN')" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 font-semibold">ENGLISH</a>
+                            <a href="#" onclick="changeLang('ZH')" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 font-semibold">MANDARIN</a>
+                        </div>
+                    </div>
+                </div>
+                <a href="index.html" class="text-blue-600 font-bold hover:text-blue-800 transition flex items-center">
+                    <i class="fas fa-arrow-left mr-2"></i> <span id="txt-nav-back">Kembali</span>
+                </a>
+            </div>
         </div>
     </nav>
 
-    <header class="gradient-bg text-white py-16">
-        <div class="container mx-auto px-6 text-center">
-            <div class="inline-block bg-yellow-400 text-blue-900 px-4 py-1 rounded-full text-sm font-bold mb-4 uppercase tracking-widest">
-                Update: Tahun Akademik 2025.2
+    <main>
+        <header class="gradient-bg text-white py-16">
+            <div class="container mx-auto px-6 text-center">
+                <div id="txt-header-update" class="inline-block bg-yellow-400 text-blue-900 px-4 py-1 rounded-full text-sm font-bold mb-4 uppercase tracking-widest">Update: Tahun Akademik 2025.2</div>
+                <h1 id="txt-header-title" class="text-3xl md:text-5xl font-extrabold mb-4">Bukti Nyata Nilai Mahasiswa</h1>
+                <p id="txt-header-desc" class="text-lg opacity-90 max-w-2xl mx-auto mb-4">Kami berkomitmen memberikan hasil terbaik dan transparan. Berikut adalah kumpulan bukti nilai nyata (Tuton, UAS, Artikel Ilmiah, hingga Skripsi) dari klien kami.</p>
+                <p id="txt-header-note" class="text-xs italic opacity-70">*Nilai akan diperbaharui setiap semester.</p>
             </div>
-            <h1 class="text-3xl md:text-5xl font-extrabold mb-4">Bukti Nyata Nilai Mahasiswa</h1>
-            <p class="text-lg opacity-90 max-w-2xl mx-auto">
-                Kami berkomitmen memberikan hasil terbaik dan transparan. Berikut adalah kumpulan bukti nilai nyata (Tuton, UAS, Artikel Ilmiah, hingga Skripsi) dari klien kami.
-            </p>
-            <p class="mt-4 text-sm italic text-blue-100">*Nilai akan diperbaharui setiap semester (tiap Tahun Akademik).</p>
-        </div>
-    </header>
+        </header>
 
-    <section class="py-16">
-        <div class="container mx-auto px-6">
-            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8">
-                
-                <div class="group cursor-pointer bg-white p-4 rounded-2xl shadow-md hover:shadow-2xl transition border-b-4 border-blue-500" onclick="openModal(this)">
-                    <img src="nilai0.png" alt="Nilai Akhir Tuton" class="rounded-xl w-full h-72 object-cover object-top">
-                    <div class="mt-4 text-center"><h4 class="font-bold text-blue-900">Nilai Akhir Tuton</h4><p class="text-xs text-gray-500">Tahun Akademik 2025.2</p></div>
+        <section class="py-12">
+            <div class="container mx-auto px-6">
+                <h2 id="txt-gallery-label" class="text-xl font-bold text-blue-900 mb-4 ml-1 italic">Foto Testimoni</h2>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 cursor-pointer" onclick="openFullGallery(0)">
+                    <div class="md:col-span-2 md:row-span-2 relative"><img src="nilai0.png" class="w-full h-full object-cover rounded-xl shadow-lg"></div>
+                    <img src="nilai1.png" class="w-full h-40 object-cover rounded-xl shadow-md">
+                    <img src="nilai2.png" class="w-full h-40 object-cover rounded-xl shadow-md">
+                    <img src="nilai3.png" class="w-full h-40 object-cover rounded-xl shadow-md">
+                    <div class="relative w-full h-40 rounded-xl overflow-hidden shadow-md">
+                        <img src="nilai4.png" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-black/60 flex flex-col items-center justify-center text-white text-center">
+                            <i class="fas fa-images text-xl mb-1"></i><span id="txt-gallery-viewall" class="font-bold text-xs uppercase">Lihat Semua Foto</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="group cursor-pointer bg-white p-4 rounded-2xl shadow-md hover:shadow-2xl transition border-b-4 border-blue-500" onclick="openModal(this)">
-                    <img src="nilai1.png" alt="Nilai Akhir Tuton" class="rounded-xl w-full h-72 object-cover object-top">
-                    <div class="mt-4 text-center"><h4 class="font-bold text-blue-900">Nilai Akhir Tuton</h4><p class="text-xs text-gray-500">Tahun Akademik 2025.2</p></div>
-                </div>
-                <div class="group cursor-pointer bg-white p-4 rounded-2xl shadow-md hover:shadow-2xl transition border-b-4 border-blue-500" onclick="openModal(this)">
-                    <img src="nilai2.png" alt="Nilai Akhir Tuton" class="rounded-xl w-full h-72 object-cover object-top">
-                    <div class="mt-4 text-center"><h4 class="font-bold text-blue-900">Nilai Akhir Tuton</h4><p class="text-xs text-gray-500">Tahun Akademik 2025.2</p></div>
-                </div>
-                <div class="group cursor-pointer bg-white p-4 rounded-2xl shadow-md hover:shadow-2xl transition border-b-4 border-blue-500" onclick="openModal(this)">
-                    <img src="nilai3.png" alt="Nilai Akhir Tuton" class="rounded-xl w-full h-72 object-cover object-top">
-                    <div class="mt-4 text-center"><h4 class="font-bold text-blue-900">Nilai Akhir Tuton</h4><p class="text-xs text-gray-500">Tahun Akademik 2025.2</p></div>
-                </div>
-
-                <div class="group cursor-pointer bg-white p-4 rounded-2xl shadow-md hover:shadow-2xl transition border-b-4 border-green-500" onclick="openModal(this)">
-                    <img src="nilai4.png" alt="Nilai Akhir Artikel Ilmiah" class="rounded-xl w-full h-72 object-cover object-top">
-                    <div class="mt-4 text-center"><h4 class="font-bold text-blue-900">Nilai Akhir Artikel Ilmiah</h4><p class="text-xs text-gray-500">Tahun Akademik 2025.2</p></div>
-                </div>
-                <div class="group cursor-pointer bg-white p-4 rounded-2xl shadow-md hover:shadow-2xl transition border-b-4 border-green-500" onclick="openModal(this)">
-                    <img src="nilai5.png" alt="Nilai Akhir Artikel Ilmiah" class="rounded-xl w-full h-72 object-cover object-top">
-                    <div class="mt-4 text-center"><h4 class="font-bold text-blue-900">Nilai Akhir Artikel Ilmiah</h4><p class="text-xs text-gray-500">Tahun Akademik 2025.2</p></div>
-                </div>
-
-                <div class="group cursor-pointer bg-white p-4 rounded-2xl shadow-md hover:shadow-2xl transition border-b-4 border-red-500" onclick="openModal(this)">
-                    <img src="nilai6.png" alt="Nilai Akhir Skripsi" class="rounded-xl w-full h-72 object-cover object-top">
-                    <div class="mt-4 text-center"><h4 class="font-bold text-blue-900">Nilai Akhir Skripsi</h4><p class="text-xs text-gray-500">Tahun Akademik 2025.2</p></div>
-                </div>
-                <div class="group cursor-pointer bg-white p-4 rounded-2xl shadow-md hover:shadow-2xl transition border-b-4 border-red-500" onclick="openModal(this)">
-                    <img src="nilai7.png" alt="Nilai Akhir Skripsi" class="rounded-xl w-full h-72 object-cover object-top">
-                    <div class="mt-4 text-center"><h4 class="font-bold text-blue-900">Nilai Akhir Skripsi</h4><p class="text-xs text-gray-500">Tahun Akademik 2025.2</p></div>
-                </div>
-                <div class="group cursor-pointer bg-white p-4 rounded-2xl shadow-md hover:shadow-2xl transition border-b-4 border-red-500" onclick="openModal(this)">
-                    <img src="nilai8.png" alt="Nilai Akhir Skripsi" class="rounded-xl w-full h-72 object-cover object-top">
-                    <div class="mt-4 text-center"><h4 class="font-bold text-blue-900">Nilai Akhir Skripsi</h4><p class="text-xs text-gray-500">Tahun Akademik 2025.2</p></div>
-                </div>
-                <div class="group cursor-pointer bg-white p-4 rounded-2xl shadow-md hover:shadow-2xl transition border-b-4 border-red-500" onclick="openModal(this)">
-                    <img src="nilai9.png" alt="Nilai Akhir Skripsi" class="rounded-xl w-full h-72 object-cover object-top">
-                    <div class="mt-4 text-center"><h4 class="font-bold text-blue-900">Nilai Akhir Skripsi</h4><p class="text-xs text-gray-500">Tahun Akademik 2025.2</p></div>
-                </div>
-
-                <div class="group cursor-pointer bg-white p-4 rounded-2xl shadow-md hover:shadow-2xl transition border-b-4 border-yellow-500" onclick="openModal(this)">
-                    <img src="nilai10.png" alt="Nilai Akhir Proyek" class="rounded-xl w-full h-72 object-cover object-top">
-                    <div class="mt-4 text-center"><h4 class="font-bold text-blue-900">Nilai Akhir Proyek</h4><p class="text-xs text-gray-500">Tahun Akademik 2025.2</p></div>
-                </div>
-                <div class="group cursor-pointer bg-white p-4 rounded-2xl shadow-md hover:shadow-2xl transition border-b-4 border-yellow-500" onclick="openModal(this)">
-                    <img src="nilai11.png" alt="Nilai Akhir Proyek" class="rounded-xl w-full h-72 object-cover object-top">
-                    <div class="mt-4 text-center"><h4 class="font-bold text-blue-900">Nilai Akhir Proyek</h4><p class="text-xs text-gray-500">Tahun Akademik 2025.2</p></div>
-                </div>
-
-                <div class="group cursor-pointer bg-white p-4 rounded-2xl shadow-md hover:shadow-2xl transition border-b-4 border-purple-500" onclick="openModal(this)">
-                    <img src="nilai12.png" alt="Nilai Akhir PKM" class="rounded-xl w-full h-72 object-cover object-top">
-                    <div class="mt-4 text-center"><h4 class="font-bold text-blue-900">Nilai Akhir PKM</h4><p class="text-xs text-gray-500">Tahun Akademik 2025.2</p></div>
-                </div>
-
             </div>
-        </div>
-    </section>
+        </section>
 
-    <footer class="bg-blue-950 text-white py-12 text-center">
+        <section class="py-12 bg-white/70 backdrop-blur-md">
+            <div class="container mx-auto px-6">
+                <h2 id="txt-why-title" class="text-2xl font-bold mb-8 text-blue-900 text-center">Kenapa Hasil Kami Berbeda?</h2>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="bg-blue-50/90 p-6 rounded-xl border-l-4 border-blue-600 shadow-sm"><h3 id="txt-f1-t" class="font-bold text-blue-900 mb-2">Transparan</h3><p id="txt-f1-p" class="text-sm">Semua nilai yang ditampilkan adalah *screenshot* asli dari portal resmi mahasiswa.</p></div>
+                    <div class="bg-green-50/90 p-6 rounded-xl border-l-4 border-green-600 shadow-sm"><h3 id="txt-f2-t" class="font-bold text-green-900 mb-2">Privasi Aman</h3><p id="txt-f2-p" class="text-sm">Nama dan NIM mahasiswa selalu kami samarkan demi kenyamanan klien.</p></div>
+                    <div class="bg-yellow-50/90 p-6 rounded-xl border-l-4 border-yellow-600 shadow-sm"><h3 id="txt-f3-t" class="font-bold text-yellow-900 mb-2">Konsisten</h3><p id="txt-f3-p" class="text-sm">Rata-rata klien kami mendapatkan nilai A atau minimal B+ di setiap mata kuliah.</p></div>
+                    <div class="bg-red-50/90 p-6 rounded-xl border-l-4 border-red-600 shadow-sm"><h3 id="txt-f4-t" class="font-bold text-red-900 mb-2">Tepat Waktu</h3><p id="txt-f4-p" class="text-sm">Kami memastikan tugas Anda selesai dan terunggah jauh sebelum batas waktu sistem berakhir.</p></div>
+                    <div class="bg-cyan-50/90 p-6 rounded-xl border-l-4 border-cyan-600 shadow-sm"><h3 id="txt-f5-t" class="font-bold text-cyan-900 mb-2">Bebas Plagiasi</h3><p id="txt-f5-p" class="text-sm">Setiap tugas dikerjakan secara manual dan unik, menjamin hasil yang aman dari deteksi Turnitin.</p></div>
+                    <div class="bg-orange-50/90 p-6 rounded-xl border-l-4 border-orange-600 shadow-sm"><h3 id="txt-f6-t" class="font-bold text-orange-900 mb-2">Garansi Revisi</h3><p id="txt-f6-p" class="text-sm">Kami memberikan layanan revisi jika hasil tidak sesuai dengan instruksi soal yang diberikan.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-white-950 text-blue py-12 text-center border-b border-white-900/50">
+            <div class="container mx-auto px-6">
+                <p id="txt-cta-text" class="text-xl mb-6 text-blue-900 font-bold">Ingin meraih nilai maksimal seperti mereka?</p>
+                <a href="https://wa.me/6282210168166" class="bg-green-500 text-white px-10 py-4 rounded-full font-bold hover:bg-green-600 transition shadow-xl inline-block">
+                    <i class="fab fa-whatsapp mr-2 text-xl"></i> <span id="txt-cta-btn">Konsultasi Sekarang</span>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-blue-950 text-white py-12">
         <div class="container mx-auto px-6">
-            <p class="mb-4">Ingin meraih nilai maksimal seperti mereka?</p>
-            <a href="https://wa.me/6282210168166" class="bg-green-500 text-white px-8 py-3 rounded-full font-bold hover:bg-green-600 transition shadow-lg inline-block">
-                <i class="fab fa-whatsapp mr-2"></i>Konsultasi Sekarang
-            </a>
-            <p class="mt-10 opacity-50 text-xs">© 2026 JasaTugasUT. Seluruh identitas klien dirahasiakan demi privasi.</p>
+            <div class="grid md:grid-cols-3 gap-12 text-left">
+                <div>
+                    <h3 class="text-2xl font-bold mb-4">JasaTugas<span class="text-blue-400">UT</span></h3>
+                    <p id="txt-footer-about" class="opacity-70">Dedikasi kami adalah kesuksesan akademik Anda. JasaTugasUT hadir sebagai partner amanah khusus mahasiswa pekerja untuk membantu menyeimbangkan karier dan pendidikan. Dengan jaminan bebas plagiasi dan pendampingan profesional, kami berkomitmen mengantarkan Anda meraih gelar Sarjana dan Magister tepat waktu tanpa mengorbankan waktu kerja.</p>
+                </div>
+                <div><h4 id="txt-footer-contact" class="font-bold text-lg mb-4">Kontak Kami</h4><p class="mb-2"><a href="https://wa.me/6282210168166" target="_blank" class="hover:text-green-400 transition"><i class="fab fa-whatsapp mr-2 text-green-400"></i> +62 822-1016-8166</a></p><p class="mb-2"><a href="mailto:jasa.tugas002@gmail.com" class="hover:text-blue-400 transition"><i class="fas fa-envelope mr-2 text-blue-400"></i> jasa.tugas002@gmail.com</a></p><p id="txt-footer-serve" class="mb-2"><i class="fas fa-map-marker-alt mr-2 text-red-400"></i> Melayani Seluruh Indonesia</p></div>
+                <div><h4 id="txt-footer-method" class="font-bold text-lg mb-4">Metode Pengerjaan</h4><ul id="txt-footer-steps" class="text-sm opacity-70"><li class="mb-2">1. Konsultasi Kebutuhan</li><li class="mb-2">2. Kesepakatan Biaya & Deadline</li><li class="mb-2">3. Proses Pengerjaan & Quality Control</li><li class="mb-2">4. Pengiriman Hasil & Garansi Revisi</li></ul></div>
+            </div>
+            <div id="txt-footer-copy" class="text-center mt-10 text-sm opacity-50">© 2026 Jasa Akademik Profesional. All rights reserved.</div>
         </div>
     </footer>
 
-    <div id="imageModal" onclick="this.style.display='none'">
-        <span class="absolute top-5 right-10 text-white text-5xl font-bold cursor-pointer transition hover:text-yellow-400">&times;</span>
-        <img id="modalImg">
+    <div id="fullGalleryModal">
+        <div class="modal-header">
+            <div class="text-blue-900 font-bold"><span id="txt-modal-title">Foto Galeri Nilai</span> <span id="slideCount" class="ml-2 text-gray-400 font-normal">1/22</span></div>
+            <button onclick="closeFullGallery()" class="text-3xl text-gray-500 hover:text-black">&times;</button>
+        </div>
+        <div class="swiper swiper-main"><div class="swiper-wrapper"><script>for(let i=0; i<22; i++) { document.write(`<div class="swiper-slide"><img src="nilai${i}.png" onclick="toggleZoom()"></div>`); }</script></div><div class="swiper-button-next !text-white"></div><div class="swiper-button-prev !text-white"></div></div>
+        <div class="thumbnail-grid" id="thumbGrid"></div>
+        <div class="pb-10 text-center bg-[#2a2a2a] wa-button-container">
+            <a href="https://wa.me/6282210168166" class="bg-blue-600 text-white px-8 py-3 rounded-lg font-bold inline-block">
+                <i class="fab fa-whatsapp mr-2"></i> <span id="txt-modal-wa">Tanya Admin via WA</span>
+            </a>
+        </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
-        function openModal(element) {
-            const modal = document.getElementById("imageModal");
-            const modalImg = document.getElementById("modalImg");
-            const img = element.getElementsByTagName('img')[0];
-            modal.style.display = "block";
-            modalImg.src = img.src;
-        }
-    </script>
+        const translations = {
+            'ID': {
+                'nav-back': 'Kembali', 'header-update': 'Update: Tahun Akademik 2025.2', 'header-title': 'Bukti Nyata Nilai Mahasiswa',
+                'header-desc': 'Kami berkomitmen memberikan hasil terbaik dan transparan. Berikut adalah kumpulan bukti nilai nyata (Tuton, UAS, Artikel Ilmiah, hingga Skripsi) dari klien kami.',
+                'header-note': '*Nilai akan diperbaharui setiap semester.', 'gallery-label': 'Foto Testimoni', 'gallery-viewall': 'Lihat Semua Foto',
+                'why-title': 'Kenapa Hasil Kami Berbeda?', 'f1t': 'Transparan', 'f1p': 'Semua nilai yang ditampilkan adalah *screenshot* asli dari portal resmi mahasiswa.',
+                'f2t': 'Privasi Aman', 'f2p': 'Nama dan NIM mahasiswa selalu kami samarkan demi kenyamanan klien.',
+                'f3t': 'Konsisten', 'f3p': 'Rata-rata klien kami mendapatkan nilai A atau minimal B+ di setiap mata kuliah.',
+                'f4t': 'Tepat Waktu', 'f4p': 'Kami memastikan tugas Anda selesai dan terunggah jauh sebelum batas waktu sistem berakhir.',
+                'f5t': 'Bebas Plagiasi', 'f5p': 'Setiap tugas dikerjakan secara manual dan unik, menjamin hasil yang aman dari deteksi Turnitin.',
+                'f6t': 'Garansi Revisi', 'f6p': 'Kami memberikan layanan revisi jika hasil tidak sesuai dengan instruksi soal yang diberikan.',
+                'cta-text': 'Ingin meraih nilai maksimal seperti mereka?', 'cta-btn': 'Konsultasi Sekarang',
+                'footer-about': 'Dedikasi kami adalah kesuksesan akademik Anda. JasaTugasUT hadir sebagai partner amanah khusus mahasiswa pekerja untuk membantu menyeimbangkan karier dan pendidikan. Dengan jaminan bebas plagiasi dan pendampingan profesional, kami berkomitmen mengantarkan Anda meraih gelar Sarjana dan Magister tepat waktu tanpa mengorbankan waktu kerja.',
+                'footer-contact': 'Kontak Kami', 'footer-serve': 'Melayani Seluruh Indonesia', 'footer-method': 'Metode Pengerjaan',
+                'footer-steps': '<li class="mb-2">1. Konsultasi Kebutuhan</li><li class="mb-2">2. Kesepakatan Biaya & Deadline</li><li class="mb-2">3. Proses Pengerjaan & Quality Control</li><li class="mb-2">4. Pengiriman Hasil & Garansi Revisi</li>',
+                'footer-copy': '© 2026 Jasa Akademik Profesional. All rights reserved.', 'modal-title': 'Foto Galeri Nilai', 'modal-wa': 'Tanya Admin via WA'
+            },
+            'EN': {
+                'nav-back': 'Back', 'header-update': 'Update: Academic Year 2025.2', 'header-title': 'Real Evidence of Student Grades',
+                'header-desc': 'We are committed to providing the best and transparent results. Here is a collection of real grade evidence (Tuton, UAS, Research, to Thesis) from our clients.',
+                'header-note': '*Grades are updated every semester.', 'gallery-label': 'Testimonials', 'gallery-viewall': 'View All Photos',
+                'why-title': 'Why Choose Us?', 'f1t': 'Transparent', 'f1p': 'All displayed grades are original screenshots from official portals.',
+                'f2t': 'Privacy Secure', 'f2p': 'Student names and IDs are always blurred for client confidentiality.',
+                'f3t': 'Consistent', 'f3p': 'Our clients consistently achieve A or at least B+ grades in every subject.',
+                'f4t': 'On Time', 'f4p': 'We ensure assignments are completed and uploaded well before the deadline.',
+                'f5t': 'Plagiarism Free', 'f5p': 'Each task is done manually, ensuring safe results from Turnitin detection.',
+                'f6t': 'Revision Guarantee', 'f6p': 'We provide revision services if results do not match given instructions.',
+                'cta-text': 'Want to achieve maximum grades like them?', 'cta-btn': 'Consult Now',
+                'footer-about': 'Our dedication is your academic success. JasaTugasUT is a trusted partner for working students to balance career and education. With a guarantee of plagiarism-free and professional assistance, we are committed to helping you earn your Bachelor\'s and Master\'s degrees on time without sacrificing work time.',
+                'footer-contact': 'Contact Us', 'footer-serve': 'Serving All of Indonesia', 'footer-method': 'Workflow',
+                'footer-steps': '<li class="mb-2">1. Consultation</li><li class="mb-2">2. Cost & Deadline Agreement</li><li class="mb-2">3. Quality Control Process</li><li class="mb-2">4. Delivery & Revision Guarantee</li>',
+                'footer-copy': '© 2026 Professional Academic Services. All rights reserved.', 'modal-title': 'Grade Gallery Photos', 'modal-wa': 'Ask Admin via WA'
+            },
+            'ZH': {
+                'nav-back': '返回', 'header-update': '更新：2025.2 学年', 'header-title': '学生成绩真实证明',
+                'header-desc': '我们致力于提供最透明的结果。以下是我们客户的真实成绩（辅导、期末考、论文）证据集。',
+                'header-note': '*成绩每学期更新一次。', 'gallery-label': '客户评价', 'gallery-viewall': '查看全部照片',
+                'why-title': '为什么选择我们？', 'f1t': '透明化', 'f1p': '所有显示的成绩均为官方学生门户网站的原始截图。',
+                'f2t': '隐私保护', 'f2p': '为了客户的隐私，学生姓名和学号始终会被模糊处理。',
+                'f3t': '成绩稳定', 'f3p': '我们的客户平均在每门课程中获得 A 或至少 B+。',
+                'f4t': '准时交付', 'f4p': '我们确保您的任务在系统截止日期之前很久就完成并上传。',
+                'f5t': '无抄袭', 'f5p': '每项任务均为手工独立完成，确保通过 Turnitin 检测。',
+                'f6t': '修改保证', 'f6p': '如果结果与要求不符，我们提供免费修改服务。',
+                'cta-text': '想和他们一样获得最高分吗？', 'cta-btn': '立即咨询',
+                'footer-about': '我们的奉献是您学业的成功。JasaTugasUT 是在职学生平衡事业与教育的可靠伙伴。通过保证无抄袭和专业协助，我们致力于帮助您准时获得学士和硕士学位，而不牺牲工作时间。',
+                'footer-contact': '联系我们', 'footer-serve': '服务全印度尼西亚', 'footer-method': '作业流程',
+                'footer-steps': '<li class="mb-2">1. 需求咨询</li><li class="mb-2">2. 费用与期限协议</li><li class="mb-2">3. 质量控制流程</li><li class="mb-2">4. 交付与修改保证</li>',
+                'footer-copy': '© 2026 专业学术服务。版权所有。', 'modal-title': '成绩画廊照片', 'modal-wa': '通过 WhatsApp 咨询'
+            }
+        };
 
+        function changeLang(lang) {
+            // SIMPAN BAHASA KE STORAGE BROWSER
+            localStorage.setItem('selectedLanguage', lang);
+
+            document.getElementById('currentLang').innerText = lang;
+            const d = translations[lang];
+            document.getElementById('txt-nav-back').innerText = d['nav-back'];
+            document.getElementById('txt-header-update').innerText = d['header-update'];
+            document.getElementById('txt-header-title').innerText = d['header-title'];
+            document.getElementById('txt-header-desc').innerText = d['header-desc'];
+            document.getElementById('txt-header-note').innerText = d['header-note'];
+            document.getElementById('txt-gallery-label').innerText = d['gallery-label'];
+            document.getElementById('txt-gallery-viewall').innerText = d['gallery-viewall'];
+            document.getElementById('txt-why-title').innerText = d['why-title'];
+            document.getElementById('txt-f1-t').innerText = d.f1t; document.getElementById('txt-f1-p').innerText = d.f1p;
+            document.getElementById('txt-f2-t').innerText = d.f2t; document.getElementById('txt-f2-p').innerText = d.f2p;
+            document.getElementById('txt-f3-t').innerText = d.f3t; document.getElementById('txt-f3-p').innerText = d.f3p;
+            document.getElementById('txt-f4-t').innerText = d.f4t; document.getElementById('txt-f4-p').innerText = d.f4p;
+            document.getElementById('txt-f5-t').innerText = d.f5t; document.getElementById('txt-f5-p').innerText = d.f5p;
+            document.getElementById('txt-f6-t').innerText = d.f6t; document.getElementById('txt-f6-p').innerText = d.f6p;
+            document.getElementById('txt-cta-text').innerText = d['cta-text'];
+            document.getElementById('txt-cta-btn').innerText = d['cta-btn'];
+            document.getElementById('txt-footer-about').innerText = d['footer-about'];
+            document.getElementById('txt-footer-contact').innerText = d['footer-contact'];
+            document.getElementById('txt-footer-serve').innerHTML = `<i class="fas fa-map-marker-alt mr-2 text-red-400"></i> ` + d['footer-serve'];
+            document.getElementById('txt-footer-method').innerText = d['footer-method'];
+            document.getElementById('txt-footer-steps').innerHTML = d['footer-steps'];
+            document.getElementById('txt-footer-copy').innerText = d['footer-copy'];
+            document.getElementById('txt-modal-title').innerText = d['modal-title'];
+            document.getElementById('txt-modal-wa').innerText = d['modal-wa'];
+        }
+
+        // OTOMATIS LOAD BAHASA YANG DISIMPAN SAAT HALAMAN DIBUKA
+        window.onload = function() {
+            const savedLang = localStorage.getItem('selectedLanguage') || 'ID';
+            changeLang(savedLang);
+        };
+
+        const totalImages = 22;
+        const swiperMain = new Swiper(".swiper-main", {
+            spaceBetween: 10, keyboard: { enabled: true }, navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
+            on: { slideChange: function () { updateActiveThumb(this.activeIndex); document.getElementById('slideCount').innerText = `${this.activeIndex + 1} / ${totalImages}`; } }
+        });
+        const thumbGrid = document.getElementById('thumbGrid');
+        for (let i = 0; i < totalImages; i++) {
+            const div = document.createElement('div'); div.className = `thumb-item ${i === 0 ? 'active' : ''}`; div.id = `thumb-${i}`;
+            div.innerHTML = `<img src="nilai${i}.png">`; div.onclick = () => { swiperMain.slideTo(i); }; thumbGrid.appendChild(div);
+        }
+        function updateActiveThumb(index) {
+            document.querySelectorAll('.thumb-item').forEach(el => el.classList.remove('active'));
+            const activeThumb = document.getElementById(`thumb-${index}`);
+            if(activeThumb) { activeThumb.classList.add('active'); activeThumb.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }
+        }
+        function toggleZoom() { document.getElementById('fullGalleryModal').classList.toggle('is-zoomed'); setTimeout(() => { swiperMain.update(); }, 300); }
+        function openFullGallery(index) { document.getElementById('fullGalleryModal').style.display = 'block'; document.body.style.overflow = 'hidden'; swiperMain.update(); swiperMain.slideTo(index, 0); }
+        function closeFullGallery() { document.getElementById('fullGalleryModal').classList.remove('is-zoomed'); document.getElementById('fullGalleryModal').style.display = 'none'; document.body.style.overflow = 'auto'; }
+    </script>
 </body>
 </html>
