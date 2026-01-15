@@ -4,40 +4,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Solusi Akademik Mahasiswa - S1 & S2</title>
-
-    <meta property="og:title" content="Solusi Akademik Mahasiswa - S1 & S2">
-    <meta property="og:description" content="Jasa pengerjaan tugas, karil, dan skripsi profesional dengan harga terjangkau.">
-    <meta property="og:image" content="https://jasatugas-ut.online/foto-mahasiswa.png">
-    <meta property="og:url" content="https://jasatugas-ut.online/">
-    <meta property="og:type" content="website">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        .gradient-bg {
-            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+        .gradient-bg { background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%); }
+        .photo-bg-blob { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+        .lang-dropdown { position: relative; display: inline-block; }
+        .lang-menu { 
+            position: absolute; right: 0; mt: 2px; width: 120px; 
+            background: white; border-radius: 8px; shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+            opacity: 0; visibility: hidden; transition: 0.3s; z-index: 100;
+            border: 1px solid #f3f4f6;
         }
-        /* Aksen kuning di belakang foto */
-        .photo-bg-blob {
-            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
-        }
+        .lang-dropdown:hover .lang-menu { opacity: 1; visibility: visible; }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans">
 
-<nav class="bg-white shadow-md sticky top-0 z-50">
+    <nav class="bg-white shadow-md sticky top-0 z-50">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
             <div class="text-2xl font-bold text-blue-900">JasaTugas<span class="text-blue-500">UT</span></div>
             <div class="hidden md:flex space-x-8 font-medium items-center">
-                <a href="#layanan" class="hover:text-blue-600 transition">Layanan</a>
-                <a href="#keunggulan" class="hover:text-blue-600 transition">Keunggulan</a>
-                
-                <a href="testimoni.html" class="bg-blue-50 text-blue-600 px-3 py-1 rounded-lg font-bold hover:bg-blue-100 transition border border-blue-100">
+                <div class="lang-dropdown">
+                    <button class="flex items-center text-blue-900 font-bold hover:text-blue-600 transition">
+                        <i class="fas fa-globe mr-2"></i><span id="currentLang">ID</span><i class="fas fa-chevron-down ml-1 text-xs"></i>
+                    </button>
+                    <div class="lang-menu shadow-xl">
+                        <a href="#" onclick="changeLang('ID')" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 font-semibold">INDONESIA</a>
+                        <a href="#" onclick="changeLang('EN')" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 font-semibold">ENGLISH</a>
+                        <a href="#" onclick="changeLang('ZH')" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 font-semibold">MANDARIN</a>
+                    </div>
+                </div>
+                <a href="#layanan" id="nav-layanan" class="hover:text-blue-600 transition">Layanan</a>
+                <a href="#keunggulan" id="nav-keunggulan" class="hover:text-blue-600 transition">Keunggulan</a>
+                <a href="testimoni.html" id="nav-testi-btn" class="bg-blue-50 text-blue-600 px-3 py-1 rounded-lg font-bold hover:bg-blue-100 transition border border-blue-100">
                     <i class="fas fa-star mr-1"></i>Testimoni Nilai
                 </a>
-                
-                <a href="#kontak" class="hover:text-blue-600 transition">Kontak</a>
+                <a href="#kontak" id="nav-kontak" class="hover:text-blue-600 transition">Kontak</a>
             </div>
-            <a href="https://wa.me/6282210168166" class="bg-green-500 text-white px-6 py-2 rounded-full font-bold hover:bg-green-600 transition shadow-lg">
+            <a href="https://wa.me/6282210168166" id="nav-konsul" class="bg-green-500 text-white px-6 py-2 rounded-full font-bold hover:bg-green-600 transition shadow-lg">
                 <i class="fab fa-whatsapp mr-2"></i>Konsultasi
             </a>
         </div>
@@ -45,183 +50,137 @@
 
     <header class="gradient-bg text-white overflow-hidden">
         <div class="container mx-auto px-6 py-12 md:py-20 flex flex-col md:flex-row items-center">
-            
             <div class="md:w-3/5 text-center md:text-left mb-12 md:mb-0">
-                <h1 class="text-4xl md:text-6xl font-extrabold mb-6 leading-tight">Partner Sukses Mahasiswa UT Kuliah S1 & S2 Sampai Wisuda!</h1>
-                <p class="text-xl mb-10 opacity-90 max-w-2xl">Solusi cerdas bagi mahasiswa UT yang sibuk bekerja untuk menyelesaikan kuliah tanpa stres! Kami hadir sebagai partner profesional untuk menangani Skripsi, Karil, hingga Tuton S1 & S2 satu semester penuh dengan jaminan kualitas original, tepat waktu, dan bebas plagiasi hingga lulus.</p>
+                <h1 id="hero-title" class="text-4xl md:text-6xl font-extrabold mb-6 leading-tight">Partner Sukses Mahasiswa UT Kuliah S1 & S2 Sampai Wisuda!</h1>
+                <p id="hero-desc" class="text-xl mb-10 opacity-90 max-w-2xl">Solusi cerdas bagi mahasiswa UT yang sibuk bekerja untuk menyelesaikan kuliah tanpa stres! Kami hadir sebagai partner profesional untuk menangani Skripsi, Karil, hingga Tuton S1 & S2 satu semester penuh dengan jaminan kualitas original, tepat waktu, dan bebas plagiasi hingga lulus.</p>
                 <div class="flex flex-col md:flex-row justify-center md:justify-start gap-4">
-                    <a href="#layanan" class="bg-white text-blue-900 px-8 py-3 rounded-lg font-bold text-lg hover:bg-gray-100 shadow-xl text-center">Lihat Layanan</a>
-                    <a href="https://wa.me/6282210168166" class="bg-yellow-400 text-blue-900 px-8 py-3 rounded-lg font-bold text-lg hover:bg-yellow-300 shadow-xl text-center">Pesan Sekarang</a>
+                    <a href="#layanan" id="hero-btn-1" class="bg-white text-blue-900 px-8 py-3 rounded-lg font-bold text-lg hover:bg-gray-100 shadow-xl text-center">Lihat Layanan</a>
+                    <a href="https://wa.me/6282210168166" id="hero-btn-2" class="bg-yellow-400 text-blue-900 px-8 py-3 rounded-lg font-bold text-lg hover:bg-yellow-300 shadow-xl text-center">Pesan Sekarang</a>
                 </div>
             </div>
-
             <div class="md:w-2/5 flex justify-center relative">
                 <div class="photo-bg-blob bg-yellow-400 w-64 h-64 md:w-80 md:h-80 absolute -bottom-5 opacity-40 z-0"></div>
-                
                 <img src="foto-mahasiswa.png" alt="Mahasiswa UT" class="relative z-10 w-full max-w-sm drop-shadow-2xl">
             </div>
-
         </div>
     </header>
 
     <section id="keunggulan" class="py-16 bg-white">
         <div class="container mx-auto px-6 text-center">
             <div class="grid grid-cols-2 md:grid-cols-5 gap-6">
-                <div class="p-4">
-                    <i class="fas fa-undo text-blue-600 text-3xl mb-3"></i>
-                    <h3 class="font-bold">Free Revisi</h3>
-                </div>
-                <div class="p-4">
-                    <i class="fas fa-clock text-blue-600 text-3xl mb-3"></i>
-                    <h3 class="font-bold">Tepat Waktu</h3>
-                </div>
-                <div class="p-4">
-                    <i class="fas fa-check-circle text-blue-600 text-3xl mb-3"></i>
-                    <h3 class="font-bold">Bebas Plagiasi</h3>
-                </div>
-                <div class="p-4">
-                    <i class="fas fa-user-tie text-blue-600 text-3xl mb-3"></i>
-                    <h3 class="font-bold">Profesional</h3>
-                </div>
-                <div class="p-4">
-                    <i class="fas fa-shield-alt text-blue-600 text-3xl mb-3"></i>
-                    <h3 class="font-bold">Amanah</h3>
-                </div>
+                <div class="p-4"><i class="fas fa-undo text-blue-600 text-3xl mb-3"></i><h3 id="f-1" class="font-bold">Free Revisi</h3></div>
+                <div class="p-4"><i class="fas fa-clock text-blue-600 text-3xl mb-3"></i><h3 id="f-2" class="font-bold">Tepat Waktu</h3></div>
+                <div class="p-4"><i class="fas fa-check-circle text-blue-600 text-3xl mb-3"></i><h3 id="f-3" class="font-bold">Bebas Plagiasi</h3></div>
+                <div class="p-4"><i class="fas fa-user-tie text-blue-600 text-3xl mb-3"></i><h3 id="f-4" class="font-bold">Profesional</h3></div>
+                <div class="p-4"><i class="fas fa-shield-alt text-blue-600 text-3xl mb-3"></i><h3 id="f-5" class="font-bold">Amanah</h3></div>
             </div>
         </div>
     </section>
 
-<section id="layanan" class="py-20 bg-gray-100">
+    <section id="layanan" class="py-20 bg-gray-100">
         <div class="container mx-auto px-6">
-            <h2 class="text-3xl font-bold text-center mb-4 text-blue-900 underline decoration-blue-500 decoration-4 underline-offset-8">Layanan Akademik Kami</h2>
-            <p class="text-center text-gray-600 mb-16 max-w-2xl mx-auto">Solusi cerdas dan terpercaya untuk membantu perjalanan kuliah Anda hingga meraih gelar wisuda.</p>
-            
+            <h2 id="srv-title" class="text-3xl font-bold text-center mb-4 text-blue-900 underline decoration-blue-500 decoration-4 underline-offset-8">Layanan Akademik Kami</h2>
+            <p id="srv-desc" class="text-center text-gray-600 mb-16 max-w-2xl mx-auto">Solusi cerdas dan terpercaya untuk membantu perjalanan kuliah Anda hingga meraih gelar wisuda.</p>
             <div class="grid md:grid-cols-3 gap-8">
                 <div class="bg-white p-8 rounded-2xl shadow-md hover:shadow-2xl transition-all border-t-4 border-blue-500 flex flex-col h-full">
                     <div class="text-blue-500 text-3xl mb-4"><i class="fas fa-file-pdf"></i></div>
-                    <h3 class="text-xl font-bold mb-4 text-blue-900">Modul PDF S1 & S2</h3>
-                    <p class="text-gray-600 mb-6 flex-grow text-sm leading-relaxed">Kuliah praktis tanpa ribet bawa buku tebal! Dirancang khusus untuk mahasiswa yang sibuk bekerja agar bisa belajar kapan saja.</p>
-                    <ul class="text-xs text-gray-500 mb-6 space-y-2">
+                    <h3 id="s1-t" class="text-xl font-bold mb-4 text-blue-900">Modul PDF S1 & S2</h3>
+                    <p id="s1-p" class="text-gray-600 mb-6 flex-grow text-sm leading-relaxed">Kuliah praktis tanpa ribet bawa buku tebal! Dirancang khusus untuk mahasiswa yang sibuk bekerja agar bisa belajar kapan saja.</p>
+                    <ul id="s1-l" class="text-xs text-gray-500 mb-6 space-y-2">
                         <li><i class="fas fa-check text-green-500 mr-1"></i> Akses Offline & Fitur Search</li>
                         <li><i class="fas fa-check text-green-500 mr-1"></i> Gak Perlu Login Berulang</li>
                         <li><i class="fas fa-check text-green-500 mr-1"></i> Ringkas, Padat, Anti Rusak</li>
                     </ul>
-                    <span class="text-blue-600 font-bold italic text-sm">Solusi Belajar Cerdas</span>
+                    <span id="s1-f" class="text-blue-600 font-bold italic text-sm">Solusi Belajar Cerdas</span>
                 </div>
-
                 <div class="bg-white p-8 rounded-2xl shadow-md hover:shadow-2xl transition-all border-t-4 border-blue-500 flex flex-col h-full">
                     <div class="text-blue-500 text-3xl mb-4"><i class="fas fa-graduation-cap"></i></div>
-                    <h3 class="text-xl font-bold mb-4 text-blue-900">Skripsi & Karya Ilmiah</h3>
-                    <p class="text-gray-600 mb-6 flex-grow text-sm leading-relaxed">Bimbingan intensif penyusunan Tugas Akhir, Skripsi, Proyek, hingga Karil. Kami bantu selesaikan revisi hingga Anda dinyatakan ACC.</p>
-                    <ul class="text-xs text-gray-500 mb-6 space-y-2">
+                    <h3 id="s2-t" class="text-xl font-bold mb-4 text-blue-900">Skripsi & Karya Ilmiah</h3>
+                    <p id="s2-p" class="text-gray-600 mb-6 flex-grow text-sm leading-relaxed">Bimbingan intensif penyusunan Tugas Akhir, Skripsi, Proyek, hingga Karil. Kami bantu selesaikan revisi hingga Anda dinyatakan ACC.</p>
+                    <ul id="s2-l" class="text-xs text-gray-500 mb-6 space-y-2">
                         <li><i class="fas fa-check text-green-500 mr-1"></i> Jaminan Lolos Turnitin</li>
                         <li><i class="fas fa-check text-green-500 mr-1"></i> Bimbingan Full Sampai Lulus</li>
                         <li><i class="fas fa-check text-green-500 mr-1"></i> Garansi Bebas Plagiasi</li>
                     </ul>
-                    <span class="text-blue-600 font-bold italic text-sm">Free Revisi Sampai ACC</span>
+                    <span id="s2-f" class="text-blue-600 font-bold italic text-sm">Free Revisi Sampai ACC</span>
                 </div>
-
                 <div class="bg-white p-8 rounded-2xl shadow-md hover:shadow-2xl transition-all border-t-4 border-blue-500 flex flex-col h-full">
                     <div class="text-blue-500 text-3xl mb-4"><i class="fas fa-laptop-house"></i></div>
-                    <h3 class="text-xl font-bold mb-4 text-blue-900">Handle Tuton</h3>
-                    <p class="text-gray-600 mb-6 flex-grow text-sm leading-relaxed">Nilai aman dan IPK maksimal tanpa ganggu pekerjaan. Kami handle diskusi dan tugas satu semester penuh.</p>
-                    <ul class="text-xs text-gray-500 mb-6 space-y-2">
+                    <h3 id="s3-t" class="text-xl font-bold mb-4 text-blue-900">Handle Tuton</h3>
+                    <p id="s3-p" class="text-gray-600 mb-6 flex-grow text-sm leading-relaxed">Nilai aman dan IPK maksimal tanpa ganggu pekerjaan. Kami handle diskusi dan tugas satu semester penuh.</p>
+                    <ul id="s3-l" class="text-xs text-gray-500 mb-6 space-y-2">
                         <li><i class="fas fa-check text-green-500 mr-1"></i> Input Tugas Tepat Waktu</li>
                         <li><i class="fas fa-check text-green-500 mr-1"></i> Jawaban Kualitas Original</li>
                         <li><i class="fas fa-check text-green-500 mr-1"></i> Semua Matakuliah S1 & S2</li>
                     </ul>
-                    <span class="text-blue-600 font-bold italic text-sm">Aman & Terpercaya</span>
+                    <span id="s3-f" class="text-blue-600 font-bold italic text-sm">Aman & Terpercaya</span>
                 </div>
-
                 <div class="bg-white p-8 rounded-2xl shadow-md hover:shadow-2xl transition-all border-t-4 border-blue-500 flex flex-col h-full">
                     <div class="text-blue-500 text-3xl mb-4"><i class="fas fa-clipboard-check"></i></div>
-                    <h3 class="text-xl font-bold mb-4 text-blue-900">Praktik PKM/Matakuliah Praktikum</h3>
-                    <p class="text-gray-600 mb-6 flex-grow text-sm leading-relaxed">Laporan praktik pemantapan kemampuan mengajar dan matakuliah praktikum lainnya yang disusun secara sistematis dan valid tanpa plagiasi.</p>
-                    <ul class="text-xs text-gray-500 mb-6 space-y-2">
+                    <h3 id="s4-t" class="text-xl font-bold mb-4 text-blue-900">Praktik PKM/Matakuliah Praktikum</h3>
+                    <p id="s4-p" class="text-gray-600 mb-6 flex-grow text-sm leading-relaxed">Laporan praktik pemantapan kemampuan mengajar dan matakuliah praktikum lainnya yang disusun secara sistematis dan valid tanpa plagiasi.</p>
+                    <ul id="s4-l" class="text-xs text-gray-500 mb-6 space-y-2">
                         <li><i class="fas fa-check text-green-500 mr-1"></i> Dokumentasi Data Akurat</li>
                         <li><i class="fas fa-check text-green-500 mr-1"></i> Sesuai Format Universitas</li>
                         <li><i class="fas fa-check text-green-500 mr-1"></i> Alur Refleksi Logis</li>
                     </ul>
-                    <span class="text-blue-600 font-bold italic text-sm">Data Valid & Realistis</span>
+                    <span id="s4-f" class="text-blue-600 font-bold italic text-sm">Data Valid & Realistis</span>
                 </div>
-
                 <div class="bg-white p-8 rounded-2xl shadow-md hover:shadow-2xl transition-all border-t-4 border-blue-500 flex flex-col h-full">
                     <div class="text-blue-500 text-3xl mb-4"><i class="fas fa-bolt"></i></div>
-                    <h3 class="text-xl font-bold mb-4 text-blue-900">Tugas & Revisi Kilat</h3>
-                    <p class="text-gray-600 mb-6 flex-grow text-sm leading-relaxed">Solusi cepat saat deadline mengejar! Kami bantu perbaikan tugas atau pengerjaan tugas mendadak dengan hasil maksimal.</p>
-                    <ul class="text-xs text-gray-500 mb-6 space-y-2">
+                    <h3 id="s5-t" class="text-xl font-bold mb-4 text-blue-900">Tugas & Revisi Kilat</h3>
+                    <p id="s5-p" class="text-gray-600 mb-6 flex-grow text-sm leading-relaxed">Solusi cepat saat deadline mengejar! Kami bantu perbaikan tugas atau pengerjaan tugas mendadak dengan hasil maksimal.</p>
+                    <ul id="s5-l" class="text-xs text-gray-500 mb-6 space-y-2">
                         <li><i class="fas fa-check text-green-500 mr-1"></i> Respon Admin Sangat Cepat</li>
                         <li><i class="fas fa-check text-green-500 mr-1"></i> Pengerjaan Prioritas Tinggi</li>
                         <li><i class="fas fa-check text-green-500 mr-1"></i> Siap Bantu Kapan Saja</li>
                     </ul>
-                    <span class="text-blue-600 font-bold italic text-sm">Fast Respon 24/7</span>
+                    <span id="s5-f" class="text-blue-600 font-bold italic text-sm">Fast Respon 24/7</span>
                 </div>
-
                 <div class="bg-blue-900 p-8 rounded-2xl shadow-md text-white flex flex-col justify-center items-center text-center">
-                    <h3 class="text-2xl font-bold mb-4">Butuh Jasa Lainnya?</h3>
-                    <p class="mb-8 opacity-80 text-sm">Konsultasikan kendala kuliah atau tugas khusus Anda secara gratis bersama tim ahli kami.</p>
-                    <a href="https://wa.me/6282210168166" class="bg-yellow-400 text-blue-900 px-8 py-3 rounded-xl font-bold hover:bg-yellow-300 transition-colors shadow-lg">
+                    <h3 id="s6-t" class="text-2xl font-bold mb-4">Butuh Jasa Lainnya?</h3>
+                    <p id="s6-p" class="mb-8 opacity-80 text-sm">Konsultasikan kendala kuliah atau tugas khusus Anda secara gratis bersama tim ahli kami.</p>
+                    <a href="https://wa.me/6282210168166" id="s6-btn" class="bg-yellow-400 text-blue-900 px-8 py-3 rounded-xl font-bold hover:bg-yellow-300 transition-colors shadow-lg">
                         <i class="fab fa-whatsapp mr-2"></i>Tanya Sekarang
                     </a>
                 </div>
             </div>
         </div>
     </section>
-<section id="testimoni" class="py-20 bg-white">
+
+    <section id="testimoni" class="py-20 bg-white">
         <div class="container mx-auto px-6">
-            <h2 class="text-3xl font-bold text-center mb-4 text-blue-900">Apa Kata Mereka?</h2>
-            <p class="text-center text-gray-600 mb-16 max-w-2xl mx-auto">Kepercayaan Anda adalah prioritas kami. Berikut adalah pengalaman nyata dari mahasiswa yang telah kami bantu.</p>
-            
+            <h2 id="t-title" class="text-3xl font-bold text-center mb-4 text-blue-900">Apa Kata Mereka?</h2>
+            <p id="t-desc" class="text-center text-gray-600 mb-16 max-w-2xl mx-auto">Kepercayaan Anda adalah prioritas kami. Berikut adalah pengalaman nyata dari mahasiswa yang telah kami bantu.</p>
             <div class="grid md:grid-cols-3 gap-8">
                 <div class="bg-gray-50 p-8 rounded-2xl shadow-sm border border-gray-100 relative">
-                    <div class="text-yellow-400 mb-4">
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                    </div>
-                    <p class="text-gray-700 italic mb-6">"Sangat terbantu dengan Modul PDF-nya! Fitur search-nya penyelamat banget pas lagi ngerjain tugas di kantor. Gak perlu ribet buka buku cetak lagi."</p>
+                    <div class="text-yellow-400 mb-4"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p id="t1-p" class="text-gray-700 italic mb-6">"Sangat terbantu dengan Modul PDF-nya! Fitur search-nya penyelamat banget pas lagi ngerjain tugas di kantor."</p>
                     <div class="flex items-center">
                         <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold mr-4">AN</div>
-                        <div>
-                            <h4 class="font-bold text-blue-900 text-sm">Maikel N.R.</h4>
-                            <p class="text-gray-500 text-xs">Mahasiswa S1 Manajemen</p>
-                        </div>
+                        <div><h4 class="font-bold text-blue-900 text-sm">Maikel N.R.</h4><p id="t1-m" class="text-gray-500 text-xs">Mahasiswa S1 Manajemen</p></div>
                     </div>
                 </div>
-
                 <div class="bg-gray-50 p-8 rounded-2xl shadow-sm border border-gray-100 relative">
-                    <div class="text-yellow-400 mb-4">
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                    </div>
-                    <p class="text-gray-700 italic mb-6">"Awalnya saya ragu buat order jasa Skripsi disini, tapi tim ternyata layanan JasaTugasUT bener-bener profesional. Revisi saya dilayani berkali-kali dengan sabar sampai akhirnya saya ACC dan bisa wisuda tepat waktu!"</p>
+                    <div class="text-yellow-400 mb-4"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p id="t2-p" class="text-gray-700 italic mb-6">"Awalnya saya ragu, tapi tim JasaTugasUT bener-bener profesional. Revisi sabar sampai ACC dan wisuda tepat waktu!"</p>
                     <div class="flex items-center">
                         <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center text-white font-bold mr-4">SR</div>
-                        <div>
-                            <h4 class="font-bold text-blue-900 text-sm">Anggita Rahmania</h4>
-                            <p class="text-gray-500 text-xs">Mahasiswa S2 Magister Manajemen</p>
-                        </div>
+                        <div><h4 class="font-bold text-blue-900 text-sm">Anggita Rahmania</h4><p id="t2-m" class="text-gray-500 text-xs">Mahasiswa S2 Magister Manajemen</p></div>
                     </div>
                 </div>
-
                 <div class="bg-gray-50 p-8 rounded-2xl shadow-sm border border-gray-100 relative">
-                    <div class="text-yellow-400 mb-4">
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                    </div>
-                    <p class="text-gray-700 italic mb-6">"Tuton semester ini aman berkat JasaTugas UT. Nilai diskusi dan tugas selalu maksimal. Cocok banget buat saya yang kerja shift dan gak sempat standby di depan laptop."</p>
+                    <div class="text-yellow-400 mb-4"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p id="t3-p" class="text-gray-700 italic mb-6">"Tuton semester ini aman. Nilai diskusi dan tugas selalu maksimal. Cocok buat yang kerja shift."</p>
                     <div class="flex items-center">
                         <div class="w-12 h-12 bg-yellow-500 rounded-full flex items-center justify-center text-white font-bold mr-4">BP</div>
-                        <div>
-                            <h4 class="font-bold text-blue-900 text-sm">Budi P.</h4>
-                            <p class="text-gray-500 text-xs">Mahasiswa S1 Hukum</p>
-                        </div>
+                        <div><h4 class="font-bold text-blue-900 text-sm">Budi P.</h4><p id="t3-m" class="text-gray-500 text-xs">Mahasiswa S1 Hukum</p></div>
                     </div>
                 </div>
             </div>
-
             <div class="text-center mt-12">
-                <a href="testimoni.html" class="inline-block text-blue-600 font-bold hover:underline">
-                    Lihat Bukti Nilai Mahasiswa Lainnya <i class="fas fa-arrow-right ml-2"></i>
-                </a>
+                <a href="testimoni.html" id="t-more" class="inline-block text-blue-600 font-bold hover:underline">Lihat Bukti Nilai Mahasiswa Lainnya <i class="fas fa-arrow-right ml-2"></i></a>
             </div>
-
         </div>
     </section>
 
@@ -229,27 +188,17 @@
         <div class="container mx-auto grid md:grid-cols-3 gap-12 border-b border-gray-700 pb-10">
             <div>
                 <h3 class="text-2xl font-bold mb-4">JasaTugas<span class="text-blue-400">UT</span></h3>
-                <p class="opacity-70">Dedikasi kami adalah kesuksesan akademik Anda. JasaTugasUT hadir sebagai partner amanah khusus mahasiswa pekerja untuk membantu menyeimbangkan karier dan pendidikan. Dengan jaminan bebas plagiasi dan pendampingan profesional, kami berkomitmen mengantarkan Anda meraih gelar Sarjana dan Magister tepat waktu tanpa mengorbankan waktu kerja.</p>
+                <p id="f-about" class="opacity-70">Dedikasi kami adalah kesuksesan akademik Anda. JasaTugasUT hadir sebagai partner amanah khusus mahasiswa pekerja untuk membantu menyeimbangkan karier dan pendidikan. Dengan jaminan bebas plagiasi dan pendampingan profesional, kami berkomitmen mengantarkan Anda meraih gelar Sarjana dan Magister tepat waktu tanpa mengorbankan waktu kerja.</p>
             </div>
             <div>
-                <h4 class="font-bold text-lg mb-4">Kontak Kami</h4>
-<p class="mb-2">
-    <a href="https://wa.me/6282210168166" target="_blank" class="hover:text-green-400 transition">
-        <i class="fab fa-whatsapp mr-2 text-green-400"></i> +62 822-1016-8166
-    </a>
-</p>
-<p class="mb-2">
-    <a href="mailto:jasa.tugas002@gmail.com" class="hover:text-blue-400 transition">
-        <i class="fas fa-envelope mr-2 text-blue-400"></i> jasa.tugas002@gmail.com
-    </a>
-</p>
-<p class="mb-2">
-    <i class="fas fa-map-marker-alt mr-2 text-red-400"></i> Melayani Seluruh Indonesia
-</p>
+                <h4 id="f-contact-h" class="font-bold text-lg mb-4">Kontak Kami</h4>
+                <p class="mb-2"><a href="https://wa.me/6282210168166" target="_blank" class="hover:text-green-400 transition"><i class="fab fa-whatsapp mr-2 text-green-400"></i> +62 822-1016-8166</a></p>
+                <p class="mb-2"><a href="mailto:jasa.tugas002@gmail.com" class="hover:text-blue-400 transition"><i class="fas fa-envelope mr-2 text-blue-400"></i> jasa.tugas002@gmail.com</a></p>
+                <p id="f-serve" class="mb-2"><i class="fas fa-map-marker-alt mr-2 text-red-400"></i> Melayani Seluruh Indonesia</p>
             </div>
             <div>
-                <h4 class="font-bold text-lg mb-4">Metode Pengerjaan</h4>
-                <ul class="text-sm opacity-70">
+                <h4 id="f-method-h" class="font-bold text-lg mb-4">Metode Pengerjaan</h4>
+                <ul id="f-steps" class="text-sm opacity-70">
                     <li class="mb-2">1. Konsultasi Kebutuhan</li>
                     <li class="mb-2">2. Kesepakatan Biaya & Deadline</li>
                     <li class="mb-2">3. Proses Pengerjaan & Quality Control</li>
@@ -257,14 +206,130 @@
                 </ul>
             </div>
         </div>
-        <div class="text-center mt-10 text-sm opacity-50">
-            © 2026 Jasa Akademik Profesional. All rights reserved.
-        </div>
+        <div id="f-copy" class="text-center mt-10 text-sm opacity-50">© 2026 Jasa Akademik Profesional. All rights reserved.</div>
     </footer>
 
+    <script>
+        const translations = {
+            'ID': {
+                'nav-layanan': 'Layanan', 'nav-keunggulan': 'Keunggulan', 'nav-testi-btn': '<i class="fas fa-star mr-1"></i>Testimoni Nilai', 'nav-kontak': 'Kontak', 'nav-konsul': '<i class="fab fa-whatsapp mr-2"></i>Konsultasi',
+                'hero-title': 'Partner Sukses Mahasiswa UT Kuliah S1 & S2 Sampai Wisuda!', 'hero-desc': 'Solusi cerdas bagi mahasiswa UT yang sibuk bekerja untuk menyelesaikan kuliah tanpa stres! Kami hadir sebagai partner profesional untuk menangani Skripsi, Karil, hingga Tuton S1 & S2 satu semester penuh.', 'hero-btn-1': 'Lihat Layanan', 'hero-btn-2': 'Pesan Sekarang',
+                'f1': 'Free Revisi', 'f2': 'Tepat Waktu', 'f3': 'Bebas Plagiasi', 'f4': 'Profesional', 'f5': 'Amanah',
+                'srv-title': 'Layanan Akademik Kami', 'srv-desc': 'Solusi cerdas dan terpercaya untuk membantu perjalanan kuliah Anda hingga meraih gelar wisuda.',
+                's1t': 'Modul PDF S1 & S2', 's1p': 'Kuliah praktis tanpa ribet bawa buku tebal! Dirancang khusus untuk mahasiswa yang sibuk bekerja agar bisa belajar kapan saja.', 's1l': '<li><i class="fas fa-check text-green-500 mr-1"></i> Akses Offline & Fitur Search</li><li><i class="fas fa-check text-green-500 mr-1"></i> Gak Perlu Login Berulang</li><li><i class="fas fa-check text-green-500 mr-1"></i> Ringkas, Padat, Anti Rusak</li>', 's1f': 'Solusi Belajar Cerdas',
+                's2t': 'Skripsi & Karya Ilmiah', 's2p': 'Bimbingan intensif penyusunan Tugas Akhir, Skripsi, Proyek, hingga Karil. Kami bantu selesaikan revisi hingga Anda dinyatakan ACC.', 's2l': '<li><i class="fas fa-check text-green-500 mr-1"></i> Jaminan Lolos Turnitin</li><li><i class="fas fa-check text-green-500 mr-1"></i> Bimbingan Full Sampai Lulus</li><li><i class="fas fa-check text-green-500 mr-1"></i> Garansi Bebas Plagiasi</li>', 's2f': 'Free Revisi Sampai ACC',
+                's3t': 'Handle Tuton', 's3p': 'Nilai aman dan IPK maksimal tanpa ganggu pekerjaan. Kami handle diskusi dan tugas satu semester penuh.', 's3l': '<li><i class="fas fa-check text-green-500 mr-1"></i> Input Tugas Tepat Waktu</li><li><i class="fas fa-check text-green-500 mr-1"></i> Jawaban Kualitas Original</li><li><i class="fas fa-check text-green-500 mr-1"></i> Semua Matakuliah S1 & S2</li>', 's3f': 'Aman & Terpercaya',
+                's4t': 'Praktik PKM/Praktikum', 's4p': 'Laporan praktik pemantapan kemampuan mengajar dan matakuliah praktikum lainnya yang disusun secara sistematis.', 's4l': '<li><i class="fas fa-check text-green-500 mr-1"></i> Dokumentasi Data Akurat</li><li><i class="fas fa-check text-green-500 mr-1"></i> Sesuai Format Universitas</li><li><i class="fas fa-check text-green-500 mr-1"></i> Alur Refleksi Logis</li>', 's4f': 'Data Valid & Realistis',
+                's5t': 'Tugas & Revisi Kilat', 's5p': 'Solusi cepat saat deadline mengejar! Kami bantu perbaikan tugas atau pengerjaan tugas mendadak dengan hasil maksimal.', 's5l': '<li><i class="fas fa-check text-green-500 mr-1"></i> Respon Admin Sangat Cepat</li><li><i class="fas fa-check text-green-500 mr-1"></i> Pengerjaan Prioritas Tinggi</li><li><i class="fas fa-check text-green-500 mr-1"></i> Siap Bantu Kapan Saja</li>', 's5f': 'Fast Respon 24/7',
+                's6t': 'Butuh Jasa Lainnya?', 's6p': 'Konsultasikan kendala kuliah atau tugas khusus Anda secara gratis bersama tim ahli kami.', 's6btn': '<i class="fab fa-whatsapp mr-2"></i>Tanya Sekarang',
+                't-title': 'Apa Kata Mereka?', 't-desc': 'Kepercayaan Anda adalah prioritas kami. Berikut adalah pengalaman nyata dari mahasiswa yang telah kami bantu.',
+                't1p': '"Sangat terbantu dengan Modul PDF-nya! Fitur search-nya penyelamat banget pas lagi ngerjain tugas di kantor."', 't1m': 'Mahasiswa S1 Manajemen',
+                't2p': '"Awalnya saya ragu, tapi tim JasaTugasUT bener-bener profesional. Revisi sabar sampai ACC dan wisuda tepat waktu!"', 't2m': 'Mahasiswa S2 Magister Manajemen',
+                't3p': '"Tuton semester ini aman. Nilai diskusi dan tugas selalu maksimal. Cocok buat yang kerja shift."', 't3m': 'Mahasiswa S1 Hukum',
+                't-more': 'Lihat Bukti Nilai Mahasiswa Lainnya <i class="fas fa-arrow-right ml-2"></i>',
+                'f-about': 'Dedikasi kami adalah kesuksesan akademik Anda. JasaTugasUT hadir sebagai partner amanah khusus mahasiswa pekerja untuk membantu menyeimbangkan karier dan pendidikan. Dengan jaminan bebas plagiasi dan pendampingan profesional, kami berkomitmen mengantarkan Anda meraih gelar Sarjana dan Magister tepat waktu tanpa mengorbankan waktu kerja.',
+                'f-contact-h': 'Kontak Kami', 'f-serve': '<i class="fas fa-map-marker-alt mr-2 text-red-400"></i> Melayani Seluruh Indonesia', 'f-method-h': 'Metode Pengerjaan',
+                'f-steps': '<li class="mb-2">1. Konsultasi Kebutuhan</li><li class="mb-2">2. Kesepakatan Biaya & Deadline</li><li class="mb-2">3. Proses Pengerjaan & Quality Control</li><li class="mb-2">4. Pengiriman Hasil & Garansi Revisi</li>',
+                'f-copy': '© 2026 Jasa Akademik Profesional. All rights reserved.'
+            },
+            'EN': {
+                'nav-layanan': 'Services', 'nav-keunggulan': 'Advantages', 'nav-testi-btn': '<i class="fas fa-star mr-1"></i>Grade Testimonials', 'nav-kontak': 'Contact', 'nav-konsul': '<i class="fab fa-whatsapp mr-2"></i>Consultation',
+                'hero-title': 'Success Partner for UT Students Bachelor & Master Degrees!', 'hero-desc': 'Smart solution for busy working UT students to complete college without stress! We are professional partners for Thesis, Research, and Tutorials.', 'hero-btn-1': 'View Services', 'hero-btn-2': 'Order Now',
+                'f1': 'Free Revision', 'f2': 'On Time', 'f3': 'Plagiarism Free', 'f4': 'Professional', 'f5': 'Trustworthy',
+                'srv-title': 'Our Academic Services', 'srv-desc': 'Smart and trusted solutions to help your college journey until graduation.',
+                's1t': 'Bachelor & Master PDF Modules', 's1p': 'Practical study without heavy books! Specially designed for busy working students to study anytime.', 's1l': '<li><i class="fas fa-check text-green-500 mr-1"></i> Offline Access & Search Feature</li><li><i class="fas fa-check text-green-500 mr-1"></i> No Repeat Login Required</li><li><i class="fas fa-check text-green-500 mr-1"></i> Compact, Concise, Durable</li>', 's1f': 'Smart Learning Solution',
+                's2t': 'Thesis & Scientific Papers', 's2p': 'Intensive guidance for Final Projects, Thesis, and Research. We help with revisions until you get approved (ACC).', 's2l': '<li><i class="fas fa-check text-green-500 mr-1"></i> Turnitin Pass Guarantee</li><li><i class="fas fa-check text-green-500 mr-1"></i> Full Guidance Until Graduation</li><li><i class="fas fa-check text-green-500 mr-1"></i> Plagiarism Free Guarantee</li>', 's2f': 'Free Revision Until ACC',
+                's3t': 'Tutorial (Tuton) Handling', 's3p': 'Secure grades and maximum GPA without disturbing your work. We handle discussions and tasks for a full semester.', 's3l': '<li><i class="fas fa-check text-green-500 mr-1"></i> On-Time Task Input</li><li><i class="fas fa-check text-green-500 mr-1"></i> Original Quality Answers</li><li><i class="fas fa-check text-green-500 mr-1"></i> All S1 & S2 Subjects</li>', 's3f': 'Safe & Trusted',
+                's4t': 'Practical Work (PKM)', 's4p': 'Systematic and valid practical reports for teaching skills and other practical courses without plagiarism.', 's4l': '<li><i class="fas fa-check text-green-500 mr-1"></i> Accurate Data Documentation</li><li><i class="fas fa-check text-green-500 mr-1"></i> Univ Format Compliance</li><li><i class="fas fa-check text-green-500 mr-1"></i> Logical Reflection Flow</li>', 's4f': 'Valid & Realistic Data',
+                's5t': 'Express Tasks & Revisions', 's5p': 'Fast solution when deadlines chase! We help with urgent task repairs or sudden assignments with maximum results.', 's5l': '<li><i class="fas fa-check text-green-500 mr-1"></i> Very Fast Admin Response</li><li><i class="fas fa-check text-green-500 mr-1"></i> High Priority Processing</li><li><i class="fas fa-check text-green-500 mr-1"></i> Ready to Help Anytime</li>', 's5f': '24/7 Fast Response',
+                's6t': 'Need Other Services?', 's6p': 'Consult your college obstacles or special tasks for free with our expert team.', 's6btn': '<i class="fab fa-whatsapp mr-2"></i>Ask Now',
+                't-title': 'What They Say?', 't-desc': 'Your trust is our priority. Here are the real experiences of students we have helped.',
+                't1p': '"Greatly helped by the PDF Modules! The search feature is a lifesaver while working at the office."', 't1m': 'S1 Management Student',
+                't2p': '"I was hesitant, but the JasaTugasUT team is truly professional. Patient revisions until ACC and graduated on time!"', 't2m': 'S2 Master of Management Student',
+                't3p': '"Tutorials this semester are safe. Discussion and task scores are always maximum. Perfect for shift workers."', 't3m': 'S1 Law Student',
+                't-more': 'View Other Student Grade Evidence <i class="fas fa-arrow-right ml-2"></i>',
+                'f-about': 'Our dedication is your academic success. JasaTugasUT is a trusted partner for working students to balance career and education. With a guarantee of plagiarism-free and professional assistance, we are committed to helping you earn your Bachelor\'s and Master\'s degrees on time without sacrificing work time.',
+                'f-contact-h': 'Contact Us', 'f-serve': '<i class="fas fa-map-marker-alt mr-2 text-red-400"></i> Serving All of Indonesia', 'f-method-h': 'Workflow',
+                'f-steps': '<li class="mb-2">1. Consultation</li><li class="mb-2">2. Cost & Deadline Agreement</li><li class="mb-2">3. Quality Control</li><li class="mb-2">4. Delivery & Revision Guarantee</li>',
+                'f-copy': '© 2026 Professional Academic Services. All rights reserved.'
+            },
+            'ZH': {
+                'nav-layanan': '服务', 'nav-keunggulan': '优势', 'nav-testi-btn': '<i class="fas fa-star mr-1"></i>成绩评价', 'nav-kontak': '联系', 'nav-konsul': '<i class="fab fa-whatsapp mr-2"></i>咨询',
+                'hero-title': 'UT 学生本科与硕士成功的合作伙伴！', 'hero-desc': '为忙碌的在职 UT 学生提供聪明的解决方案，无压力完成学业！我们是论文、研究和辅导的专业伙伴。', 'hero-btn-1': '查看服务', 'hero-btn-2': '立即预订',
+                'f1': '免费修改', 'f2': '准时', 'f3': '无抄袭', 'f4': '专业', 'f5': '信誉',
+                'srv-title': '我们的学术服务', 'srv-desc': '明智且值得信赖的解决方案，助您的大学之路直至毕业。',
+                's1t': '本科与硕士 PDF 模块', 's1p': '无需厚重书籍的实用学习！专为忙碌的在职学生设计，随时随地学习。', 's1l': '<li><i class="fas fa-check text-green-500 mr-1"></i> 离线访问和搜索功能</li><li><i class="fas fa-check text-green-500 mr-1"></i> 无需重复登录</li><li><i class="fas fa-check text-green-500 mr-1"></i> 紧凑、简练、耐用</li>', 's1f': '智慧学习方案',
+                's2t': '论文与科研文章', 's2p': '毕业设计、论文、研究的密集指导。我们协助修改直至获得批准 (ACC)。', 's2l': '<li><i class="fas fa-check text-green-500 mr-1"></i> Turnitin 通过保证</li><li><i class="fas fa-check text-green-500 mr-1"></i> 全程指导直至毕业</li><li><i class="fas fa-check text-green-500 mr-1"></i> 无抄袭保证</li>', 's2f': '免费修改至批准',
+                's3t': '在线辅导 (Tuton) 代办', 's3p': '在不影响工作的情况下确保高分。我们代办整个学期的讨论和任务。', 's3l': '<li><i class="fas fa-check text-green-500 mr-1"></i> 准时提交任务</li><li><i class="fas fa-check text-green-500 mr-1"></i> 原创高质量答案</li><li><i class="fas fa-check text-green-500 mr-1"></i> 涵盖所有本科与硕士课程</li>', 's3f': '安全可靠',
+                's4t': '教学实践 (PKM)', 's4p': '为教学技能和其他实践课程提供系统、有效的实践报告，杜绝抄袭。', 's4l': '<li><i class="fas fa-check text-green-500 mr-1"></i> 准确的数据记录</li><li><i class="fas fa-check text-green-500 mr-1"></i> 符合学校格式要求</li><li><i class="fas fa-check text-green-500 mr-1"></i> 逻辑严密的反馈流程</li>', 's4f': '真实有效的数据',
+                's5t': '加急任务与修改', 's5p': '截止日期临近时的快速方案！我们协助紧急修复任务，确保获得最佳结果。', 's5l': '<li><i class="fas fa-check text-green-500 mr-1"></i> 管理员极速响应</li><li><i class="fas fa-check text-green-500 mr-1"></i> 高优先级处理</li><li><i class="fas fa-check text-green-500 mr-1"></i> 随时准备提供帮助</li>', 's5f': '24/7 快速响应',
+                's6t': '需要其他服务？', 's6p': '与我们的专家团队免费咨询您的学业障碍或特殊任务。', 's6btn': '<i class="fab fa-whatsapp mr-2"></i>立即咨询',
+                't-title': '听听他们怎么说？', 't-desc': '您的信任是我们的首要任务。以下是我们帮助过的学生的真实经历。',
+                't1p': '"PDF 模块非常有帮助！在办公室工作时，搜索功能简直是救星。"', 't1m': '本科管理系学生',
+                't2p': '"我曾犹豫过，但团队真的很专业。耐心修改直至成功并准时毕业！"', 't2m': '管理学硕士学生',
+                't3p': '"这学期的辅导很稳。讨论和任务得分总是最高的。非常适合轮班工作者。"', 't3m': '本科法律系学生',
+                't-more': '查看更多学生成绩证明 <i class="fas fa-arrow-right ml-2"></i>',
+                'f-about': '我们的奉献是您学业的成功。JasaTugasUT 是在职学生平衡事业与教育的可靠伙伴。通过保证无抄袭和专业协助，我们致力于帮助您准时获得学士和硕士学位，而不牺牲工作时间。',
+                'f-contact-h': '联系我们', 'f-serve': '<i class="fas fa-map-marker-alt mr-2 text-red-400"></i> 服务全印度尼西亚', 'f-method-h': '作业流程',
+                'f-steps': '<li class="mb-2">1. 需求咨询</li><li class="mb-2">2. 费用与期限协议</li><li class="mb-2">3. 质量控制流程</li><li class="mb-2">4. 交付与修改保证</li>',
+                'f-copy': '© 2026 专业学术服务。版权所有。'
+            }
+        };
+
+        function changeLang(lang) {
+            // SIMPAN BAHASA KE STORAGE BROWSER
+            localStorage.setItem('selectedLanguage', lang);
+            
+            document.getElementById('currentLang').innerText = lang;
+            const d = translations[lang];
+            
+            // Navigasi
+            document.getElementById('nav-layanan').innerText = d['nav-layanan'];
+            document.getElementById('nav-keunggulan').innerText = d['nav-keunggulan'];
+            document.getElementById('nav-testi-btn').innerHTML = d['nav-testi-btn'];
+            document.getElementById('nav-kontak').innerText = d['nav-kontak'];
+            document.getElementById('nav-konsul').innerHTML = d['nav-konsul'];
+            // Hero
+            document.getElementById('hero-title').innerText = d['hero-title'];
+            document.getElementById('hero-desc').innerText = d['hero-desc'];
+            document.getElementById('hero-btn-1').innerText = d['hero-btn-1'];
+            document.getElementById('hero-btn-2').innerText = d['hero-btn-2'];
+            // Features
+            document.getElementById('f-1').innerText = d['f1'];
+            document.getElementById('f-2').innerText = d['f2'];
+            document.getElementById('f-3').innerText = d['f3'];
+            document.getElementById('f-4').innerText = d['f4'];
+            document.getElementById('f-5').innerText = d['f5'];
+            // Services Section
+            document.getElementById('srv-title').innerText = d['srv-title'];
+            document.getElementById('srv-desc').innerText = d['srv-desc'];
+            document.getElementById('s1-t').innerText = d['s1t']; document.getElementById('s1-p').innerText = d['s1p']; document.getElementById('s1-l').innerHTML = d['s1l']; document.getElementById('s1-f').innerText = d['s1f'];
+            document.getElementById('s2-t').innerText = d['s2t']; document.getElementById('s2-p').innerText = d['s2p']; document.getElementById('s2-l').innerHTML = d['s2l']; document.getElementById('s2-f').innerText = d['s2f'];
+            document.getElementById('s3-t').innerText = d['s3t']; document.getElementById('s3-p').innerText = d['s3p']; document.getElementById('s3-l').innerHTML = d['s3l']; document.getElementById('s3-f').innerText = d['s3f'];
+            document.getElementById('s4-t').innerText = d['s4t']; document.getElementById('s4-p').innerText = d['s4p']; document.getElementById('s4-l').innerHTML = d['s4l']; document.getElementById('s4-f').innerText = d['s4f'];
+            document.getElementById('s5-t').innerText = d['s5t']; document.getElementById('s5-p').innerText = d['s5p']; document.getElementById('s5-l').innerHTML = d['s5l']; document.getElementById('s5-f').innerText = d['s5f'];
+            document.getElementById('s6-t').innerText = d['s6t']; document.getElementById('s6-p').innerText = d['s6p']; document.getElementById('s6-btn').innerHTML = d['s6btn'];
+            // Testimonials
+            document.getElementById('t-title').innerText = d['t-title'];
+            document.getElementById('t-desc').innerText = d['t-desc'];
+            document.getElementById('t1-p').innerText = d['t1p']; document.getElementById('t1-m').innerText = d['t1m'];
+            document.getElementById('t2-p').innerText = d['t2p']; document.getElementById('t2-m').innerText = d['t2m'];
+            document.getElementById('t3-p').innerText = d['t3p']; document.getElementById('t3-m').innerText = d['t3m'];
+            document.getElementById('t-more').innerHTML = d['t-more'];
+            // Footer
+            document.getElementById('f-about').innerText = d['f-about'];
+            document.getElementById('f-contact-h').innerText = d['f-contact-h'];
+            document.getElementById('f-serve').innerHTML = d['f-serve'];
+            document.getElementById('f-method-h').innerText = d['f-method-h'];
+            document.getElementById('f-steps').innerHTML = d['f-steps'];
+            document.getElementById('f-copy').innerText = d['f-copy'];
+        }
+
+        // OTOMATIS LOAD BAHASA YANG DISIMPAN SAAT HALAMAN DIBUKA
+        window.onload = function() {
+            const savedLang = localStorage.getItem('selectedLanguage') || 'ID';
+            changeLang(savedLang);
+        };
+    </script>
 </body>
-
 </html>
-
-
-
