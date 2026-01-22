@@ -73,12 +73,12 @@
             <div class="container mx-auto px-6">
                 <h2 id="txt-gallery-label" class="text-xl font-bold text-blue-900 mb-4 ml-1 italic">Foto Testimoni</h2>
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4 cursor-pointer" onclick="openFullGallery(0)">
-                    <div class="md:col-span-2 md:row-span-2 relative"><img src="nilai0.png" class="w-full h-full object-cover rounded-xl shadow-lg"></div>
-                    <img src="nilai1.png" class="w-full h-40 object-cover rounded-xl shadow-md">
-                    <img src="nilai2.png" class="w-full h-40 object-cover rounded-xl shadow-md">
-                    <img src="nilai3.png" class="w-full h-40 object-cover rounded-xl shadow-md">
+                    <div class="md:col-span-2 md:row-span-2 relative"><img src="nilai26.png" class="w-full h-full object-cover rounded-xl shadow-lg"></div>
+                    <img src="nilai25.png" class="w-full h-40 object-cover rounded-xl shadow-md">
+                    <img src="nilai24.png" class="w-full h-40 object-cover rounded-xl shadow-md">
+                    <img src="nilai23.png" class="w-full h-40 object-cover rounded-xl shadow-md">
                     <div class="relative w-full h-40 rounded-xl overflow-hidden shadow-md">
-                        <img src="nilai4.png" class="w-full h-full object-cover">
+                        <img src="nilai22.png" class="w-full h-full object-cover">
                         <div class="absolute inset-0 bg-black/60 flex flex-col items-center justify-center text-white text-center">
                             <i class="fas fa-images text-xl mb-1"></i><span id="txt-gallery-viewall" class="font-bold text-xs uppercase">Lihat Semua Foto</span>
                         </div>
@@ -130,7 +130,18 @@
             <div class="text-blue-900 font-bold"><span id="txt-modal-title">Foto Galeri Nilai</span> <span id="slideCount" class="ml-2 text-gray-400 font-normal">1/27</span></div>
             <button onclick="closeFullGallery()" class="text-3xl text-gray-500 hover:text-black">&times;</button>
         </div>
-        <div class="swiper swiper-main"><div class="swiper-wrapper"><script>for(let i=0; i<27; i++) { document.write(`<div class="swiper-slide"><img src="nilai${i}.png" onclick="toggleZoom()"></div>`); }</script></div><div class="swiper-button-next !text-white"></div><div class="swiper-button-prev !text-white"></div></div>
+        <div class="swiper swiper-main">
+            <div class="swiper-wrapper">
+                <script>
+                    // Menampilkan dari nilai26 mundur ke nilai0
+                    for(let i=26; i>=0; i--) { 
+                        document.write(`<div class="swiper-slide"><img src="nilai${i}.png" onclick="toggleZoom()"></div>`); 
+                    }
+                </script>
+            </div>
+            <div class="swiper-button-next !text-white"></div>
+            <div class="swiper-button-prev !text-white"></div>
+        </div>
         <div class="thumbnail-grid" id="thumbGrid"></div>
         <div class="pb-10 text-center bg-[#2a2a2a] wa-button-container">
             <a href="https://wa.me/6282210168166" class="bg-blue-600 text-white px-8 py-3 rounded-lg font-bold inline-block">
@@ -193,9 +204,7 @@
         };
 
         function changeLang(lang) {
-            // SIMPAN BAHASA KE STORAGE BROWSER
             localStorage.setItem('selectedLanguage', lang);
-
             document.getElementById('currentLang').innerText = lang;
             const d = translations[lang];
             document.getElementById('txt-nav-back').innerText = d['nav-back'];
@@ -224,7 +233,6 @@
             document.getElementById('txt-modal-wa').innerText = d['modal-wa'];
         }
 
-        // OTOMATIS LOAD BAHASA YANG DISIMPAN SAAT HALAMAN DIBUKA
         window.onload = function() {
             const savedLang = localStorage.getItem('selectedLanguage') || 'ID';
             changeLang(savedLang);
@@ -235,20 +243,27 @@
             spaceBetween: 10, keyboard: { enabled: true }, navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
             on: { slideChange: function () { updateActiveThumb(this.activeIndex); document.getElementById('slideCount').innerText = `${this.activeIndex + 1} / ${totalImages}`; } }
         });
+
         const thumbGrid = document.getElementById('thumbGrid');
-        for (let i = 0; i < totalImages; i++) {
-            const div = document.createElement('div'); div.className = `thumb-item ${i === 0 ? 'active' : ''}`; div.id = `thumb-${i}`;
-            div.innerHTML = `<img src="nilai${i}.png">`; div.onclick = () => { swiperMain.slideTo(i); }; thumbGrid.appendChild(div);
+        // Loop mundur untuk thumbnail
+        for (let i = 26; i >= 0; i--) {
+            const div = document.createElement('div'); 
+            div.className = `thumb-item ${i === 26 ? 'active' : ''}`; 
+            div.id = `thumb-${26 - i}`;
+            div.innerHTML = `<img src="nilai${i}.png">`; 
+            div.onclick = () => { swiperMain.slideTo(26 - i); }; 
+            thumbGrid.appendChild(div);
         }
+
         function updateActiveThumb(index) {
             document.querySelectorAll('.thumb-item').forEach(el => el.classList.remove('active'));
             const activeThumb = document.getElementById(`thumb-${index}`);
             if(activeThumb) { activeThumb.classList.add('active'); activeThumb.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }
         }
+
         function toggleZoom() { document.getElementById('fullGalleryModal').classList.toggle('is-zoomed'); setTimeout(() => { swiperMain.update(); }, 300); }
         function openFullGallery(index) { document.getElementById('fullGalleryModal').style.display = 'block'; document.body.style.overflow = 'hidden'; swiperMain.update(); swiperMain.slideTo(index, 0); }
         function closeFullGallery() { document.getElementById('fullGalleryModal').classList.remove('is-zoomed'); document.getElementById('fullGalleryModal').style.display = 'none'; document.body.style.overflow = 'auto'; }
     </script>
 </body>
 </html>
-
