@@ -127,10 +127,10 @@
 
     <div id="fullGalleryModal">
         <div class="modal-header">
-            <div class="text-blue-900 font-bold"><span id="txt-modal-title">Foto Galeri Nilai</span> <span id="slideCount" class="ml-2 text-gray-400 font-normal">1/22</span></div>
+            <div class="text-blue-900 font-bold"><span id="txt-modal-title">Foto Galeri Nilai</span> <span id="slideCount" class="ml-2 text-gray-400 font-normal">1/27</span></div>
             <button onclick="closeFullGallery()" class="text-3xl text-gray-500 hover:text-black">&times;</button>
         </div>
-        <div class="swiper swiper-main"><div class="swiper-wrapper"><script>for(let i=0; i<22; i++) { document.write(`<div class="swiper-slide"><img src="nilai${i}.png" onclick="toggleZoom()"></div>`); }</script></div><div class="swiper-button-next !text-white"></div><div class="swiper-button-prev !text-white"></div></div>
+        <div class="swiper swiper-main"><div class="swiper-wrapper"><script>for(let i=0; i<27; i++) { document.write(`<div class="swiper-slide"><img src="nilai${i}.png" onclick="toggleZoom()"></div>`); }</script></div><div class="swiper-button-next !text-white"></div><div class="swiper-button-prev !text-white"></div></div>
         <div class="thumbnail-grid" id="thumbGrid"></div>
         <div class="pb-10 text-center bg-[#2a2a2a] wa-button-container">
             <a href="https://wa.me/6282210168166" class="bg-blue-600 text-white px-8 py-3 rounded-lg font-bold inline-block">
@@ -230,7 +230,7 @@
             changeLang(savedLang);
         };
 
-        const totalImages = 22;
+        const totalImages = 27;
         const swiperMain = new Swiper(".swiper-main", {
             spaceBetween: 10, keyboard: { enabled: true }, navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
             on: { slideChange: function () { updateActiveThumb(this.activeIndex); document.getElementById('slideCount').innerText = `${this.activeIndex + 1} / ${totalImages}`; } }
@@ -251,3 +251,4 @@
     </script>
 </body>
 </html>
+
