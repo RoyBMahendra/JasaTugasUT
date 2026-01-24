@@ -73,12 +73,12 @@
             <div class="container mx-auto px-6">
                 <h2 id="txt-gallery-label" class="text-xl font-bold text-blue-900 mb-4 ml-1 italic">Foto Testimoni</h2>
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4 cursor-pointer" onclick="openFullGallery(0)">
-                    <div class="md:col-span-2 md:row-span-2 relative"><img src="nilai26.png" class="w-full h-full object-cover rounded-xl shadow-lg"></div>
+                    <div class="md:col-span-2 md:row-span-2 relative"><img src="nilai28.png" class="w-full h-full object-cover rounded-xl shadow-lg"></div>
+                    <img src="nilai27.png" class="w-full h-40 object-cover rounded-xl shadow-md">
+                    <img src="nilai26.png" class="w-full h-40 object-cover rounded-xl shadow-md">
                     <img src="nilai25.png" class="w-full h-40 object-cover rounded-xl shadow-md">
-                    <img src="nilai24.png" class="w-full h-40 object-cover rounded-xl shadow-md">
-                    <img src="nilai23.png" class="w-full h-40 object-cover rounded-xl shadow-md">
                     <div class="relative w-full h-40 rounded-xl overflow-hidden shadow-md">
-                        <img src="nilai22.png" class="w-full h-full object-cover">
+                        <img src="nilai24.png" class="w-full h-full object-cover">
                         <div class="absolute inset-0 bg-black/60 flex flex-col items-center justify-center text-white text-center">
                             <i class="fas fa-images text-xl mb-1"></i><span id="txt-gallery-viewall" class="font-bold text-xs uppercase">Lihat Semua Foto</span>
                         </div>
@@ -127,13 +127,13 @@
 
     <div id="fullGalleryModal">
         <div class="modal-header">
-            <div class="text-blue-900 font-bold"><span id="txt-modal-title">Foto Galeri Nilai</span> <span id="slideCount" class="ml-2 text-gray-400 font-normal">1/27</span></div>
+            <div class="text-blue-900 font-bold"><span id="txt-modal-title">Foto Galeri Nilai</span> <span id="slideCount" class="ml-2 text-gray-400 font-normal">1/29</span></div>
             <button onclick="closeFullGallery()" class="text-3xl text-gray-500 hover:text-black">&times;</button>
         </div>
         <div class="swiper swiper-main">
             <div class="swiper-wrapper">
                 <script>
-                    // Menampilkan dari nilai26 mundur ke nilai0
+                    // Loop mundur: Mulai dari 28 ke 0
                     for(let i=28; i>=0; i--) { 
                         document.write(`<div class="swiper-slide"><img src="nilai${i}.png" onclick="toggleZoom()"></div>`); 
                     }
@@ -238,20 +238,21 @@
             changeLang(savedLang);
         };
 
-        const totalImages = 27;
+        // Total 29 foto (0-28)
+        const totalImages = 29;
         const swiperMain = new Swiper(".swiper-main", {
             spaceBetween: 10, keyboard: { enabled: true }, navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
             on: { slideChange: function () { updateActiveThumb(this.activeIndex); document.getElementById('slideCount').innerText = `${this.activeIndex + 1} / ${totalImages}`; } }
         });
 
         const thumbGrid = document.getElementById('thumbGrid');
-        // Loop mundur untuk thumbnail
+        // Thumbnail Loop mundur dari 28 ke 0
         for (let i = 28; i >= 0; i--) {
             const div = document.createElement('div'); 
-            div.className = `thumb-item ${i === 26 ? 'active' : ''}`; 
-            div.id = `thumb-${26 - i}`;
+            div.className = `thumb-item ${i === 28 ? 'active' : ''}`; 
+            div.id = `thumb-${28 - i}`; // ID urutan slide
             div.innerHTML = `<img src="nilai${i}.png">`; 
-            div.onclick = () => { swiperMain.slideTo(26 - i); }; 
+            div.onclick = () => { swiperMain.slideTo(28 - i); }; 
             thumbGrid.appendChild(div);
         }
 
@@ -267,4 +268,3 @@
     </script>
 </body>
 </html>
-
