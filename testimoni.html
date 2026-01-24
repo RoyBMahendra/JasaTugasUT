@@ -134,7 +134,7 @@
             <div class="swiper-wrapper">
                 <script>
                     // Menampilkan dari nilai26 mundur ke nilai0
-                    for(let i=26; i>=0; i--) { 
+                    for(let i=28; i>=0; i--) { 
                         document.write(`<div class="swiper-slide"><img src="nilai${i}.png" onclick="toggleZoom()"></div>`); 
                     }
                 </script>
@@ -246,7 +246,7 @@
 
         const thumbGrid = document.getElementById('thumbGrid');
         // Loop mundur untuk thumbnail
-        for (let i = 26; i >= 0; i--) {
+        for (let i = 28; i >= 0; i--) {
             const div = document.createElement('div'); 
             div.className = `thumb-item ${i === 26 ? 'active' : ''}`; 
             div.id = `thumb-${26 - i}`;
@@ -267,3 +267,4 @@
     </script>
 </body>
 </html>
+
