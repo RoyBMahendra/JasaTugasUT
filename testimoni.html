@@ -64,7 +64,7 @@
             <div class="container mx-auto px-6 text-center">
                 <div id="txt-header-update" class="inline-block bg-yellow-400 text-blue-900 px-4 py-1 rounded-full text-sm font-bold mb-4 uppercase tracking-widest">Update: Tahun Akademik 2025.2</div>
                 <h1 id="txt-header-title" class="text-3xl md:text-5xl font-extrabold mb-4">Bukti Nyata Nilai Mahasiswa</h1>
-                <p id="txt-header-desc" class="text-lg opacity-90 max-w-2xl mx-auto mb-4">Kami berkomitmen memberikan hasil terbaik dan transparan. Berikut adalah sebagian dari bukti nilai nyata (Nilai Akhir  UAS, Tuton, UAS, Artikel Ilmiah, hingga Skripsi) dari klien kami.</p>
+                <p id="txt-header-desc" class="text-lg opacity-90 max-w-2xl mx-auto mb-4">Kami berkomitmen memberikan hasil terbaik dan transparan. Berikut adalah kumpulan bukti nilai nyata (Nilai Akhir UAS, Tuton, UAS, Artikel Ilmiah, hingga Skripsi) dari klien kami.</p>
                 <p id="txt-header-note" class="text-xs italic opacity-70">*Nilai akan diperbaharui setiap semester.</p>
             </div>
         </header>
@@ -118,7 +118,24 @@
                     <h3 class="text-2xl font-bold mb-4">JasaTugas<span class="text-blue-400">UT</span></h3>
                     <p id="txt-footer-about" class="opacity-70">Dedikasi kami adalah kesuksesan akademik Anda. JasaTugasUT hadir sebagai partner amanah khusus mahasiswa pekerja untuk membantu menyeimbangkan karier dan pendidikan. Dengan jaminan bebas plagiasi dan pendampingan profesional, kami berkomitmen mengantarkan Anda meraih gelar Sarjana dan Magister tepat waktu tanpa mengorbankan waktu kerja.</p>
                 </div>
-                <div><h4 id="txt-footer-contact" class="font-bold text-lg mb-4">Kontak Kami</h4><p class="mb-2"><a href="https://wa.me/6282210168166" target="_blank" class="hover:text-green-400 transition"><i class="fab fa-whatsapp mr-2 text-green-400"></i> +62 822-1016-8166</a></p><p class="mb-2"><a href="mailto:jasa.tugas002@gmail.com" class="hover:text-blue-400 transition"><i class="fas fa-envelope mr-2 text-blue-400"></i> jasa.tugas002@gmail.com</a></p><p id="txt-footer-serve" class="mb-2"><i class="fas fa-map-marker-alt mr-2 text-red-400"></i> Melayani Seluruh Indonesia</p></div>
+                <div>
+                    <h4 id="txt-footer-contact" class="font-bold text-lg mb-4">Kontak Kami</h4>
+                    <p class="mb-2"><a href="https://wa.me/6282210168166" target="_blank" class="hover:text-green-400 transition"><i class="fab fa-whatsapp mr-2 text-green-400"></i> +62 822-1016-8166</a></p>
+                    <p class="mb-2"><a href="mailto:jasa.tugas002@gmail.com" class="hover:text-blue-400 transition"><i class="fas fa-envelope mr-2 text-blue-400"></i> jasa.tugas002@gmail.com</a></p>
+                    
+                    <p class="mb-2">
+                        <a href="https://www.tiktok.com/@jasa.tugas.ut0?_r=1&_t=ZS-93NoDtPcpEX" target="_blank" class="hover:text-pink-400 transition">
+                            <i class="fab fa-tiktok mr-2 text-pink-400"></i> TikTok
+                        </a>
+                    </p>
+                    <p class="mb-2">
+                        <a href="https://www.facebook.com/share/1AXip8zraK/" target="_blank" class="hover:text-blue-400 transition">
+                            <i class="fab fa-facebook mr-2 text-blue-400"></i> Facebook
+                        </a>
+                    </p>
+
+                    <p id="txt-footer-serve" class="mb-2"><i class="fas fa-map-marker-alt mr-2 text-red-400"></i> Melayani Seluruh Indonesia</p>
+                </div>
                 <div><h4 id="txt-footer-method" class="font-bold text-lg mb-4">Metode Pengerjaan</h4><ul id="txt-footer-steps" class="text-sm opacity-70"><li class="mb-2">1. Konsultasi Kebutuhan</li><li class="mb-2">2. Kesepakatan Biaya & Deadline</li><li class="mb-2">3. Proses Pengerjaan & Quality Control</li><li class="mb-2">4. Pengiriman Hasil & Garansi Revisi</li></ul></div>
             </div>
             <div id="txt-footer-copy" class="text-center mt-10 text-sm opacity-50">© 2026 Jasa Akademik Profesional. All rights reserved.</div>
@@ -133,7 +150,6 @@
         <div class="swiper swiper-main">
             <div class="swiper-wrapper">
                 <script>
-                    // Loop mundur: Mulai dari 28 ke 0
                     for(let i=28; i>=0; i--) { 
                         document.write(`<div class="swiper-slide"><img src="nilai${i}.png" onclick="toggleZoom()"></div>`); 
                     }
@@ -155,7 +171,7 @@
         const translations = {
             'ID': {
                 'nav-back': 'Kembali', 'header-update': 'Update: Tahun Akademik 2025.2', 'header-title': 'Bukti Nyata Nilai Mahasiswa',
-                'header-desc': 'Kami berkomitmen memberikan hasil terbaik dan transparan. Berikut adalah kumpulan bukti nilai nyata (Tuton, UAS, Artikel Ilmiah, hingga Skripsi) dari klien kami.',
+                'header-desc': 'Kami berkomitmen memberikan hasil terbaik dan transparan. Berikut adalah kumpulan bukti nilai nyata (Nilai Akhir UAS, Tuton, UAS, Artikel Ilmiah, hingga Skripsi) dari klien kami.',
                 'header-note': '*Nilai akan diperbaharui setiap semester.', 'gallery-label': 'Foto Testimoni', 'gallery-viewall': 'Lihat Semua Foto',
                 'why-title': 'Kenapa Hasil Kami Berbeda?', 'f1t': 'Transparan', 'f1p': 'Semua nilai yang ditampilkan adalah *screenshot* asli dari portal resmi mahasiswa.',
                 'f2t': 'Privasi Aman', 'f2p': 'Nama dan NIM mahasiswa selalu kami samarkan demi kenyamanan klien.',
@@ -171,7 +187,7 @@
             },
             'EN': {
                 'nav-back': 'Back', 'header-update': 'Update: Academic Year 2025.2', 'header-title': 'Real Evidence of Student Grades',
-                'header-desc': 'We are committed to providing the best and transparent results. Here is a collection of real grade evidence (Tuton, UAS, Research, to Thesis) from our clients.',
+                'header-desc': 'We are committed to providing the best and transparent results. Here is a collection of real grade evidence (Final Exam, Tuton, Research, to Thesis) from our clients.',
                 'header-note': '*Grades are updated every semester.', 'gallery-label': 'Testimonials', 'gallery-viewall': 'View All Photos',
                 'why-title': 'Why Choose Us?', 'f1t': 'Transparent', 'f1p': 'All displayed grades are original screenshots from official portals.',
                 'f2t': 'Privacy Secure', 'f2p': 'Student names and IDs are always blurred for client confidentiality.',
@@ -180,14 +196,14 @@
                 'f5t': 'Plagiarism Free', 'f5p': 'Each task is done manually, ensuring safe results from Turnitin detection.',
                 'f6t': 'Revision Guarantee', 'f6p': 'We provide revision services if results do not match given instructions.',
                 'cta-text': 'Want to achieve maximum grades like them?', 'cta-btn': 'Consult Now',
-                'footer-about': 'Our dedication is your academic success. JasaTugasUT is a trusted partner for working students to balance career and education. With a guarantee of plagiarism-free and professional assistance, we are committed to helping you earn your Bachelor\'s and Master\'s degrees on time without sacrificing work time.',
+                'footer-about': 'Our dedication is your academic success. JasaTugasUT is a trusted partner for working students to balance career and education.',
                 'footer-contact': 'Contact Us', 'footer-serve': 'Serving All of Indonesia', 'footer-method': 'Workflow',
                 'footer-steps': '<li class="mb-2">1. Consultation</li><li class="mb-2">2. Cost & Deadline Agreement</li><li class="mb-2">3. Quality Control Process</li><li class="mb-2">4. Delivery & Revision Guarantee</li>',
                 'footer-copy': '© 2026 Professional Academic Services. All rights reserved.', 'modal-title': 'Grade Gallery Photos', 'modal-wa': 'Ask Admin via WA'
             },
             'ZH': {
                 'nav-back': '返回', 'header-update': '更新：2025.2 学年', 'header-title': '学生成绩真实证明',
-                'header-desc': '我们致力于提供最透明的结果。以下是我们客户的真实成绩（辅导、期末考、论文）证据集。',
+                'header-desc': '我们致力于提供最透明的结果。以下是我们客户的真实成绩证据集。',
                 'header-note': '*成绩每学期更新一次。', 'gallery-label': '客户评价', 'gallery-viewall': '查看全部照片',
                 'why-title': '为什么选择我们？', 'f1t': '透明化', 'f1p': '所有显示的成绩均为官方学生门户网站的原始截图。',
                 'f2t': '隐私保护', 'f2p': '为了客户的隐私，学生姓名和学号始终会被模糊处理。',
@@ -196,7 +212,7 @@
                 'f5t': '无抄袭', 'f5p': '每项任务均为手工独立完成，确保通过 Turnitin 检测。',
                 'f6t': '修改保证', 'f6p': '如果结果与要求不符，我们提供免费修改服务。',
                 'cta-text': '想和他们一样获得最高分吗？', 'cta-btn': '立即咨询',
-                'footer-about': '我们的奉献是您学业的成功。JasaTugasUT 是在职学生平衡事业与教育的可靠伙伴。通过保证无抄袭和专业协助，我们致力于帮助您准时获得学士和硕士学位，而不牺牲工作时间。',
+                'footer-about': '我们的奉献是您学业的成功。JasaTugasUT 是在职学生平衡事业与教育的可靠伙伴。',
                 'footer-contact': '联系我们', 'footer-serve': '服务全印度尼西亚', 'footer-method': '作业流程',
                 'footer-steps': '<li class="mb-2">1. 需求咨询</li><li class="mb-2">2. 费用与期限协议</li><li class="mb-2">3. 质量控制流程</li><li class="mb-2">4. 交付与修改保证</li>',
                 'footer-copy': '© 2026 专业学术服务。版权所有。', 'modal-title': '成绩画廊照片', 'modal-wa': '通过 WhatsApp 咨询'
@@ -238,7 +254,6 @@
             changeLang(savedLang);
         };
 
-        // Total 29 foto (0-28)
         const totalImages = 29;
         const swiperMain = new Swiper(".swiper-main", {
             spaceBetween: 10, keyboard: { enabled: true }, navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
@@ -246,11 +261,10 @@
         });
 
         const thumbGrid = document.getElementById('thumbGrid');
-        // Thumbnail Loop mundur dari 28 ke 0
         for (let i = 28; i >= 0; i--) {
             const div = document.createElement('div'); 
             div.className = `thumb-item ${i === 28 ? 'active' : ''}`; 
-            div.id = `thumb-${28 - i}`; // ID urutan slide
+            div.id = `thumb-${28 - i}`;
             div.innerHTML = `<img src="nilai${i}.png">`; 
             div.onclick = () => { swiperMain.slideTo(28 - i); }; 
             thumbGrid.appendChild(div);
@@ -268,5 +282,3 @@
     </script>
 </body>
 </html>
-
-
